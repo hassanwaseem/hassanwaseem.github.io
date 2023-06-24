@@ -33,7 +33,7 @@ const menudecoration = "none";
 
 // Header properties
 const headercolor = accentcolor;
-const headerfontsize = "18pt";
+const headerfontsize = "50pt";
 const headerdecoration = "none";
 const namecolor = accentcolor;
 const namefontsize = "40pt";
@@ -41,7 +41,7 @@ const namefontsize = "40pt";
 
 // Publication properties
 const ptitlecolor = accentcolor;
-const ptitlefontsize = bodyfontsize;
+const ptitlefontsize = 16;
 const ptitleweight = bodyfontweight;
 const ptitledecoration = "none";
 const ptitlestyle = "normal";
