@@ -98,7 +98,7 @@ $(".name").css("color", namecolor);
 $(".name").css("font-size", namefontsize);
 
 $(".papertitle").css("color", ptitlecolor);
-$(".papertitle").css("font-size", ptitlefontsize);
+$(".papertitle").css("font-size", 50);
 $(".papertitle").css("font-weight", ptitleweight);
 $(".papertitle").css("text-decoration", ptitledecoration);
 $(".papertitle").css("font-style", ptitlestyle);
