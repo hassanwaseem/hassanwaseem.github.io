@@ -5,6 +5,7 @@
 .scaled-image {
     max-width: 50px; /* Set the maximum desired width */
     max-height: 50px; /* Set the maximum desired height */
+    filter: grayscale(30%);
 }
 a:hover {
     /* font-weight: 400; */
