@@ -5,7 +5,7 @@
 .scaled-image {
     max-width: 60px; /* Set the maximum desired width */
     max-height: 60px; /* Set the maximum desired height */
-    filter: grayscale(30%);
+    filter: grayscale(50%);
     transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 .scaled-image:hover {
