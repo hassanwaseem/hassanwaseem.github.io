@@ -3,8 +3,8 @@
     filter: grayscale(20%);
 } */
 .scaled-image {
-    max-width: 100px; /* Set the maximum desired width */
-    max-height: 100px; /* Set the maximum desired height */
+    max-width: 60px; /* Set the maximum desired width */
+    max-height: 60px; /* Set the maximum desired height */
 }
 a:hover {
     /* font-weight: 400; */
