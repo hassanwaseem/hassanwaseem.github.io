@@ -2,7 +2,10 @@
     height: 50px;
     filter: grayscale(20%);
 } */
-
+.scaled-image {
+    max-width: 150px; /* Set the maximum desired width */
+    max-height: 150px; /* Set the maximum desired height */
+}
 a:hover {
     /* font-weight: 400; */
     text-decoration: none;
