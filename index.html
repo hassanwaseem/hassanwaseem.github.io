@@ -596,9 +596,16 @@
     <script src="assets/style.js"></script> 
     <script>
 		document.addEventListener('DOMContentLoaded', function () {
-    const maxYear = 2024; // Adjust this as you add future publications
+    // Function to find the maximum year based on available publication sections
+    function findLatestYear() {
+        const yearDivs = document.querySelectorAll('[id^="20"]');
+        const years = Array.from(yearDivs).map(div => parseInt(div.id));
+        return Math.max(...years);
+    }
+
+    const latestYear = findLatestYear();  // Find the latest year based on IDs
     const currentYear = new Date().getFullYear();
-    const startYear = Math.max(currentYear, maxYear);
+    const startYear = Math.max(currentYear, latestYear);
 
     function updateYearLinks(baseYear) {
         const yearsDiv = document.getElementById('publicationYears');
@@ -624,41 +631,36 @@
         prevLink.href = '#';
         prevLink.onclick = function(event) {
             event.preventDefault();
-            shiftYears(-5);
+            shiftYears(baseYear - 5);
         };
         prevLink.textContent = 'Previous';
         yearsDiv.appendChild(prevLink);
 
-        if (baseYear + 5 <= maxYear) {
-            yearsDiv.appendChild(document.createTextNode(' | '));
-            let currentLink = document.createElement('a');
-            currentLink.href = '#';
-            currentLink.onclick = function(event) {
-                event.preventDefault();
-                resetToCurrent();
-            };
-            currentLink.textContent = 'Current';
-            yearsDiv.appendChild(currentLink);
-        }
+        yearsDiv.appendChild(document.createTextNode(' | '));
+        let currentLink = document.createElement('a');
+        currentLink.href = '#';
+        currentLink.onclick = function(event) {
+            event.preventDefault();
+            resetToCurrent();
+        };
+        currentLink.textContent = 'Current';
+        yearsDiv.appendChild(currentLink);
     }
 
     function resetToCurrent() {
         updateYearLinks(startYear);
     }
 
-    function shiftYears(offset) {
-        let baseYear = parseInt(document.querySelector('#publicationYears a').textContent);
-        baseYear += offset;
-
-        if (baseYear < 2016) {
-            baseYear = 2016; // Don't allow going back past the earliest year you have publications for
+    function shiftYears(newBaseYear) {
+        if (newBaseYear < 2016) {
+            newBaseYear = 2016; // Don't allow going back past the earliest year you have publications for
         }
-
-        updateYearLinks(baseYear);
+        updateYearLinks(newBaseYear);
     }
 
     resetToCurrent(); // Initialize the page with the current year or latest publication year
 });
+
 
 </script>
 
