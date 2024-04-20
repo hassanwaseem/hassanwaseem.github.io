@@ -93,14 +93,13 @@
                  on my <a class="in-text" href="mailto:waha@di.ku.dk">email</a>.
 		    
 <!-------------- Publications  -------------->
-		 <p id ="Publications" class="header pt-5">Publications</p>
-		<div id="publicationYears"></div> <
-
-		<div id="publicationsContainer">
-		  <!-- You will dynamically load or display the publications by year here -->
-		</div>
-
-							
+<p id ="Publications" class="header pt-5">Publications</p>
+<div id="publicationYears"></div
+														 
+<div id="publicationsContainer">
+		
+<!---------------------- Publications for 2024 ---------------------->
+		<div class="year-group" id="pub-2024">
 				 <!----------------Pnuematic actuator 2024--------------------->              
 					 <div class="py-2">
 					 <p class="paper my-2 pl-2"> 
@@ -121,6 +120,10 @@
 							 <a class="tag" href="assets/Earthquake2024.pdf" target="_blank">Pdf</a>
 					 </p>
 					 </div>
+
+			</div>
+	<!---------------------- Publications for 2023 ---------------------->
+		<div class="year-group" id="pub-2023">
 			 <!----------------Predicting Attributes 2023--------------------->              
 								 <div class="py-2">
 								 <p class="paper my-2 pl-2"> 
@@ -163,6 +166,9 @@
                      <a class="tag" href="https://www.youtube.com/watch?v=6IFodbQB00c" target="_blank">Video</a> 
                  </p>
                  </div>
+				</div>
+	<!---------------------- Publications for 2022 ---------------------->
+		<div class="year-group" id="pub-2022">
         <!---------------Thimble 2022---------------------->
                  <div class="py-2">
                  <p class="paper my-2 pl-2"> 
@@ -195,7 +201,12 @@
                      <a class="tag" href="assets/DualChamber2022.pdf" target="_blank">Pdf</a> 
                  </p>
                  </div>
-
+			</div>
+	<!---------------------- Publications for 2021 ---------------------->
+		<div class="year-group" id="pub-2021">
+						</div>
+	<!---------------------- Publications for 2020 ---------------------->
+		<div class="year-group" id="pub-2020">
         <!---------------Mouse 2020---------------------->
                  <div class="py-2">
                  <p class="paper my-2 pl-2"> 
@@ -206,7 +217,9 @@
                      <a class="tag" href="assets/Mouse2020.pdf" target="_blank">Pdf</a> 
                  </p>
                  </div>              
-
+			</div>
+	<!---------------------- Publications for 2019 ---------------------->
+		<div class="year-group" id="pub-2019">
         <!---------------Fire Extinguisher 2019---------------------->
                  <div class="py-2">
                  <p class="paper my-2 pl-2"> 
@@ -240,7 +253,9 @@
                      <a class="tag" href="assets/Ultrasound2019.pdf" target="_blank">Pdf</a> 
                  </p>
                  </div>   
-
+			</div>
+	<!---------------------- Publications for 2018 ---------------------->
+		<div class="year-group" id="pub-2018">
           <!---------------Authoring demo 2018---------------------->
                  <div class="py-2">
                  <p class="paper my-2 pl-2"> 
@@ -309,7 +324,9 @@
                      <a class="tag" href="assets/HapticLogo2018.pdf" target="_blank">Pdf</a> 
                  </p>
                  </div>
-
+			</div>
+	<!---------------------- Publications for 2017 ---------------------->
+		<div class="year-group" id="pub-2017">
           <!---------------Library 2017---------------------->
                  <div class="py-2">
                  <p class="paper my-2 pl-2"> 
@@ -366,7 +383,9 @@
                      <a class="tag" href="assets/SampleSelection2017.pdf" target="_blank">Pdf</a> 
                  </p>
                  </div>
-
+			</div>
+	<!---------------------- Publications for 2016 ---------------------->
+		<div class="year-group" id="pub-20216">
           <!---------------SMASS 2016---------------------->
                  <div class="py-2">
                  <p class="paper my-2 pl-2"> 
@@ -399,7 +418,7 @@
                      <a class="tag" href="assets/MRPack2016.pdf" target="_blank">Pdf</a> 
                  </p>
                  </div>
-
+</div> <!-----------  end publications container -------------->
 	<!---------------Domestic Conferences---------------------->
 								<div id = "DomesticConference" class="py-2">
                  <p class="header pt-5">Domestic Conferences</p>
@@ -576,7 +595,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>  
     <script src="assets/style.js"></script> 
     <script>
-document.addEventListener('DOMContentLoaded', function () {
+		document.addEventListener('DOMContentLoaded', function () {
     function shiftYears(offset) {
         const currentYear = new Date().getFullYear();
         let baseYear = parseInt(document.querySelector('#publicationYears a')?.textContent) || currentYear;
