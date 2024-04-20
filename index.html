@@ -99,7 +99,7 @@
 <div id="publicationsContainer">
 		
 <!---------------------- Publications for 2024 ---------------------->
-		<div class="year-group" id="pub-2024">
+		<div id="2024">
 				 <!----------------Pnuematic actuator 2024--------------------->              
 					 <div class="py-2">
 					 <p class="paper my-2 pl-2"> 
@@ -123,7 +123,7 @@
 
 			</div>
 	<!---------------------- Publications for 2023 ---------------------->
-		<div class="year-group" id="pub-2023">
+		<div id="2023">
 			 <!----------------Predicting Attributes 2023--------------------->              
 								 <div class="py-2">
 								 <p class="paper my-2 pl-2"> 
@@ -168,7 +168,7 @@
                  </div>
 				</div>
 	<!---------------------- Publications for 2022 ---------------------->
-		<div class="year-group" id="pub-2022">
+		<div id="2022">
         <!---------------Thimble 2022---------------------->
                  <div class="py-2">
                  <p class="paper my-2 pl-2"> 
@@ -203,10 +203,10 @@
                  </div>
 			</div>
 	<!---------------------- Publications for 2021 ---------------------->
-		<div class="year-group" id="pub-2021">
+		<div id="2021">
 						</div>
 	<!---------------------- Publications for 2020 ---------------------->
-		<div class="year-group" id="pub-2020">
+		<div id="2020">
         <!---------------Mouse 2020---------------------->
                  <div class="py-2">
                  <p class="paper my-2 pl-2"> 
@@ -219,7 +219,7 @@
                  </div>              
 			</div>
 	<!---------------------- Publications for 2019 ---------------------->
-		<div class="year-group" id="pub-2019">
+		<div id="2019">
         <!---------------Fire Extinguisher 2019---------------------->
                  <div class="py-2">
                  <p class="paper my-2 pl-2"> 
@@ -255,7 +255,7 @@
                  </div>   
 			</div>
 	<!---------------------- Publications for 2018 ---------------------->
-		<div class="year-group" id="pub-2018">
+		<div id="2018">
           <!---------------Authoring demo 2018---------------------->
                  <div class="py-2">
                  <p class="paper my-2 pl-2"> 
@@ -326,7 +326,7 @@
                  </div>
 			</div>
 	<!---------------------- Publications for 2017 ---------------------->
-		<div class="year-group" id="pub-2017">
+		<div id="2017">
           <!---------------Library 2017---------------------->
                  <div class="py-2">
                  <p class="paper my-2 pl-2"> 
@@ -385,7 +385,7 @@
                  </div>
 			</div>
 	<!---------------------- Publications for 2016 ---------------------->
-		<div class="year-group" id="pub-20216">
+		<div id="2016">
           <!---------------SMASS 2016---------------------->
                  <div class="py-2">
                  <p class="paper my-2 pl-2"> 
@@ -596,58 +596,70 @@
     <script src="assets/style.js"></script> 
     <script>
 		document.addEventListener('DOMContentLoaded', function () {
-    function shiftYears(offset) {
-        const currentYear = new Date().getFullYear();
-        let baseYear = parseInt(document.querySelector('#publicationYears a')?.textContent) || currentYear;
-        baseYear += offset;
-
-        if (baseYear < 2016) {
-            baseYear = 2016;
-        }
-
-        updateYearLinks(baseYear);
-    }
-
-    function resetToCurrent() {
-        const currentYear = new Date().getFullYear();
-        updateYearLinks(currentYear - (currentYear % 5));
-    }
+    const maxYear = 2024; // Adjust this as you add future publications
+    const currentYear = new Date().getFullYear();
+    const startYear = Math.max(currentYear, maxYear);
 
     function updateYearLinks(baseYear) {
         const yearsDiv = document.getElementById('publicationYears');
-        yearsDiv.innerHTML = '';
+        yearsDiv.innerHTML = ''; // Clear existing year links
 
         for (let i = 0; i < 5; i++) {
             let year = baseYear - i;
-            let yearLink = document.createElement('a');
-            yearLink.href = `#${year}`;
-            yearLink.textContent = year;
-            yearsDiv.appendChild(yearLink);
+            if (year >= 2016) { // Assuming you have publications from 2016 onwards
+                let yearLink = document.createElement('a');
+                yearLink.href = `#${year}`;
+                yearLink.textContent = year;
+                yearsDiv.appendChild(yearLink);
 
-            if (i < 4) {
-                yearsDiv.appendChild(document.createTextNode(' | '));
+                if (i < 4) {
+                    yearsDiv.appendChild(document.createTextNode(' | '));
+                }
             }
         }
 
+        // Add navigation links
         yearsDiv.appendChild(document.createTextNode(' | '));
         let prevLink = document.createElement('a');
         prevLink.href = '#';
-        prevLink.onclick = function() { shiftYears(-5); };
+        prevLink.onclick = function(event) {
+            event.preventDefault();
+            shiftYears(-5);
+        };
         prevLink.textContent = 'Previous';
         yearsDiv.appendChild(prevLink);
 
-        if (baseYear + 5 <= new Date().getFullYear()) {
+        if (baseYear + 5 <= maxYear) {
             yearsDiv.appendChild(document.createTextNode(' | '));
             let currentLink = document.createElement('a');
             currentLink.href = '#';
-            currentLink.onclick = resetToCurrent;
+            currentLink.onclick = function(event) {
+                event.preventDefault();
+                resetToCurrent();
+            };
             currentLink.textContent = 'Current';
             yearsDiv.appendChild(currentLink);
         }
     }
 
-    resetToCurrent(); // Initialize the page with the current year
+    function resetToCurrent() {
+        updateYearLinks(startYear);
+    }
+
+    function shiftYears(offset) {
+        let baseYear = parseInt(document.querySelector('#publicationYears a').textContent);
+        baseYear += offset;
+
+        if (baseYear < 2016) {
+            baseYear = 2016; // Don't allow going back past the earliest year you have publications for
+        }
+
+        updateYearLinks(baseYear);
+    }
+
+    resetToCurrent(); // Initialize the page with the current year or latest publication year
 });
+
 </script>
 
 </body>
