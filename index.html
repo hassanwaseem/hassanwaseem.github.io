@@ -576,62 +576,61 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>  
     <script src="assets/style.js"></script> 
     <script>
-			function shiftYears(offset) {
-            const currentYear = new Date().getFullYear();
-            let baseYear = parseInt(document.querySelector('#publicationYears a').textContent);
-            baseYear += offset;
+document.addEventListener('DOMContentLoaded', function () {
+    function shiftYears(offset) {
+        const currentYear = new Date().getFullYear();
+        let baseYear = parseInt(document.querySelector('#publicationYears a')?.textContent) || currentYear;
+        baseYear += offset;
 
-            // Prevent going back past 2016
-            if (baseYear < 2016) {
-                baseYear = 2016;
-            }
-
-            updateYearLinks(baseYear);
+        if (baseYear < 2016) {
+            baseYear = 2016;
         }
 
-        function resetToCurrent() {
-            const currentYear = new Date().getFullYear();
-            updateYearLinks(currentYear - (currentYear % 5)); // Adjust to the nearest five year batch
-        }
+        updateYearLinks(baseYear);
+    }
 
-        function updateYearLinks(baseYear) {
-            const yearsDiv = document.getElementById('publicationYears');
-            yearsDiv.innerHTML = ''; // Clear existing year links
+    function resetToCurrent() {
+        const currentYear = new Date().getFullYear();
+        updateYearLinks(currentYear - (currentYear % 5));
+    }
 
-            for (let i = 0; i < 5; i++) {
-                let year = baseYear - i;
-                let yearLink = document.createElement('a');
-                yearLink.href = `#${year}`;
-                yearLink.textContent = year;
-                yearsDiv.appendChild(yearLink);
+    function updateYearLinks(baseYear) {
+        const yearsDiv = document.getElementById('publicationYears');
+        yearsDiv.innerHTML = '';
 
-                if (i < 4) { // Add separators except after the last year
-                    yearsDiv.appendChild(document.createTextNode(' | '));
-                }
-            }
+        for (let i = 0; i < 5; i++) {
+            let year = baseYear - i;
+            let yearLink = document.createElement('a');
+            yearLink.href = `#${year}`;
+            yearLink.textContent = year;
+            yearsDiv.appendChild(yearLink);
 
-            // Add navigation links
-            yearsDiv.appendChild(document.createTextNode(' | '));
-            let prevLink = document.createElement('a');
-            prevLink.href = '#';
-            prevLink.onclick = function() { shiftYears(-5); };
-            prevLink.textContent = 'Previous';
-            yearsDiv.appendChild(prevLink);
-
-            if (baseYear + 5 <= new Date().getFullYear()) {
+            if (i < 4) {
                 yearsDiv.appendChild(document.createTextNode(' | '));
-                let currentLink = document.createElement('a');
-                currentLink.href = '#';
-                currentLink.onclick = resetToCurrent;
-                currentLink.textContent = 'Current';
-                yearsDiv.appendChild(currentLink);
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            resetToCurrent(); // Initialize the page with the current year
-        });
-		</script>
+        yearsDiv.appendChild(document.createTextNode(' | '));
+        let prevLink = document.createElement('a');
+        prevLink.href = '#';
+        prevLink.onclick = function() { shiftYears(-5); };
+        prevLink.textContent = 'Previous';
+        yearsDiv.appendChild(prevLink);
+
+        if (baseYear + 5 <= new Date().getFullYear()) {
+            yearsDiv.appendChild(document.createTextNode(' | '));
+            let currentLink = document.createElement('a');
+            currentLink.href = '#';
+            currentLink.onclick = resetToCurrent;
+            currentLink.textContent = 'Current';
+            yearsDiv.appendChild(currentLink);
+        }
+    }
+
+    resetToCurrent(); // Initialize the page with the current year
+});
+</script>
+
 </body>
   <style>
     body {
