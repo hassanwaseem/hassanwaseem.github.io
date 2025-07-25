@@ -1,11 +1,11 @@
 // Initialize font properties
-const fontname = 'Inter';
-const fontweights = [300, 400, 600];
+const fontname = sans-serif;
+const fontweights = [300, 400]
 
 // Color properties
-const basecolor = "#333";
-const accentcolor = "#0d6efd";
-const highlightcolor = "#0b5ed7";
+const basecolor = "#000";
+const accentcolor = "#222";
+const highlightcolor = "#111";
 
 // const basecolor = "#888";
 // const accentcolor = "#222";
@@ -13,8 +13,8 @@ const highlightcolor = "#0b5ed7";
 
 // Body properties
 const bodyfontweight = 300;
-const bodyfontsize = "14px";
-const backgroundcolor = "#f8f9fa";
+const bodyfontsize = "12pt";
+const backgroundcolor = "#fff";
 
 // Link properties
 const acolor = accentcolor;
@@ -24,8 +24,8 @@ const adecoration = "none";
 // const ahoverdecoration = "none"; //none, underline, overline, dotted, color (https://www.w3schools.com/cssref/pr_text_text-decoration.asp)
 
 // Menu properties
-const menucolor = accentcolor;
-const menufontsize = "18pt";
+const menucolor = basecolor;
+const menufontsize = "20pt";
 const menudecoration = "none";
 // const menuhover = accentcolor;
 // const menuhoverduration = "0.3s";
@@ -33,10 +33,10 @@ const menudecoration = "none";
 
 // Header properties
 const headercolor = accentcolor;
-const headerfontsize = "32pt";
+const headerfontsize = "50pt";
 const headerdecoration = "none";
 const namecolor = accentcolor;
-const namefontsize = "28pt";
+const namefontsize = "40pt";
 
 
 // Publication properties
