@@ -1,0 +1,10 @@
+id,year,type,title,organization,location,url,display_order,record_status
+"science-postdoc-day","2024","Event organization","SCIENCE Postdoc Day","University of Copenhagen","Copenhagen, Denmark","","1","published"
+"hcc-open-house","2023–2024","Event organization","HCC Open House","University of Copenhagen","Copenhagen, Denmark","","2","published"
+"eurohaptics-body-exhibition","2024","Exhibition","Using Low-Frequency Sound to Create Non-Contact Sensations on and in the Body","EuroHaptics 2024","Lille, France","https://eurohaptics.org/ehc2024/","3","published"
+"siggraph-texture-demo","2019","Demonstration","Heterogeneous Haptic Texture Assignment to Mesh Models Based on Image","SIGGRAPH 2019","Los Angeles, USA","https://s2019.siggraph.org/","4","published"
+"siggraph-fire-demo","2019","Demonstration","Tactile and Kinesthetic Feedback for Safety Experience/Training Simulators","SIGGRAPH 2019","Los Angeles, USA","https://s2019.siggraph.org/","5","published"
+"haptics-authoring-demo","2018","Demonstration","Authoring New Haptic Textures Based on Interpolation of Real Textures in Affective Space","IEEE Haptics Symposium 2018","San Francisco, USA","https://2018.hapticssymposium.org/","6","published"
+"hci-korea","2016","Conference organization","HCI Korea ’16","Kyung Hee University","South Korea","","7","published"
+"eurohaptics-library-demo","2016","Demonstration","Towards Universal Haptic Library","EuroHaptics 2016","London, UK","https://ieeexplore.ieee.org/document/7463143","8","published"
+"example-outreach","2099","Exhibition","Example outreach activity","Example Organization","City, Country","https://example.com/event","999","example"
