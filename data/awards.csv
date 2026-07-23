@@ -1,0 +1,11 @@
+id,year,title,organization,related_work,notes,display_order,record_status
+"award-tendon-2025","2025","Honorable Mention","ACM CHI 2025","Tendon Vibration for Creating Movement Illusions in Virtual Reality","","1","published"
+"award-friction-wheel-2019","2019","Best Student Innovation Challenge Award","IEEE World Haptics Conference 2019","Friction Wheel","","2","published"
+"award-thresholds-2017","2017","Outstanding Paper Award","Ubiquitous Robots and Ambient Intelligence","Perceptual Thresholds for Haptic Texture Discrimination","","3","published"
+"award-haptic-logos-2018","2018","Nominated for Best Paper Award","EuroHaptics 2018","Haptic Logos","","4","published"
+"award-kcc-2016","2016","Outstanding Paper Award","Korean Computer Congress 2016","Building Haptic Texture Perceptual Space from Real-Life Textured Surfaces","","5","published"
+"scholarship-doctoral","2016–2022","Doctoral Research Scholarship","Kyung Hee University","","South Korea","6","published"
+"scholarship-graduate","2014–2022","Graduate Student Scholarship","Kyung Hee University","","South Korea","7","published"
+"scholarship-masters","2014–2016","Masters Research Scholarship","Kyung Hee University","","South Korea","8","published"
+"scholarship-undergraduate","2008–2009","Undergraduate Merit Scholarship","National University of Sciences and Technology","","Pakistan","9","published"
+"example-award","2099","Example Award","Example Organization","Related project or paper","Optional note","999","example"
