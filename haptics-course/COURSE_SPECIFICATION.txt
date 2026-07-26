@@ -1,0 +1,133 @@
+HAPTICS: FOUNDATIONS, INTERFACES, AND PERCEPTION
+PRIVATE COURSE SPECIFICATION
+
+PURPOSE
+Create a graduate-level open course that explains haptics from first principles through advanced research. The course connects human touch perception, hardware and actuation, rendering and control, psychophysics, computational modelling, experiment design, system evaluation, and emerging research frontiers.
+
+PUBLICATION STATUS
+- Development branch: haptics-course
+- Status: draft
+- Visibility: private development
+- Live deployment: not authorized
+- Link from live portfolio: not authorized
+- Publication requires explicit final approval
+
+COURSE PARTS AND CHAPTERS
+
+PART I — FOUNDATIONS OF TOUCH
+01. What Is Haptics? From Physical Interaction to Perception
+02. The Human Somatosensory System
+03. Psychophysics of Touch
+04. Perceptual Organization and Multisensory Integration
+
+PART II — PHYSICAL AND ENGINEERING FOUNDATIONS
+05. Mechanics for Haptics
+06. Signals and Vibrations
+07. Sensors for Haptic Systems
+08. Haptic Actuators
+
+PART III — HAPTIC INTERFACES AND RENDERING
+09. Vibrotactile Rendering
+10. Kinesthetic and Force Feedback
+11. Haptic Rendering
+12. Surface and Texture Haptics
+13. Wearable and Soft Haptics
+14. Mid-Air and Contactless Haptics
+
+PART IV — COMPUTATIONAL AND EXPERIMENTAL HAPTICS
+15. Computational Haptic Modelling
+16. Machine Learning for Haptics
+17. Designing Haptic Experiments
+18. Haptic System Evaluation
+
+PART V — RESEARCH FRONTIERS
+19. Haptics in Virtual and Augmented Reality
+20. Teleoperation and Shared Haptic Interaction
+21. Haptics for Training, Medicine, and Rehabilitation
+22. Volumetric and Spatial Haptics
+23. Safety, Ethics, and Responsible Design
+24. How to Conduct Haptics Research
+
+STANDARD CHAPTER FORMAT
+Every chapter should contain:
+- chapter title and subtitle;
+- course part, difficulty, reading time, prerequisites, status, and version;
+- learning objectives;
+- intuitive explanation before formalism;
+- formal definitions and physical or mathematical model;
+- design implications;
+- worked example;
+- common misconceptions;
+- limitations and open questions;
+- key takeaways;
+- five-question self-test;
+- practical or research-design exercise;
+- recommended reading;
+- citation and revision information.
+
+READER MODES
+1. Guided course: follow Chapters 01–24 in order.
+2. Reference mode: use chapter search, filters, and glossary.
+3. Research pathways:
+   - haptic device designer;
+   - perception and psychophysics researcher;
+   - computational haptics researcher;
+   - mid-air haptics researcher;
+   - wearable haptics researcher;
+   - VR and AR haptics researcher;
+   - medical and rehabilitation haptics researcher.
+
+CONTENT MODEL
+- Long-form chapters are Markdown.
+- Chapter, reference, glossary, pathway, and exercise metadata are CSV.
+- Each chapter is located by a marker such as <!-- CHAPTER:01 -->.
+- Chapter metadata specifies the associated Markdown content file.
+- Pipe characters separate multi-value CSV fields.
+
+CONTENT QUALITY REQUIREMENTS
+- Define terminology consistently.
+- Separate actuator command, physical output, and perceptual response.
+- State assumptions, units, body site, mounting, and operating conditions.
+- Use equations only when they clarify the concept.
+- Include calibrated physical measurement and perceptual validation where relevant.
+- Distinguish established findings from hypotheses and open research questions.
+- Use primary sources and standard textbooks.
+- Avoid unsupported universal claims from one device, body site, task, or population.
+- Include safety notes for mechanical, acoustic, electrical, thermal, and clinical systems.
+- Include accessible figure descriptions and licensing information.
+
+VISUAL AND INTERACTIVE CONTENT PLANNED FOR LATER ITERATIONS
+- haptic interaction-loop diagram;
+- receptor and somatosensory diagrams;
+- signal, spectrum, and frequency-response plots;
+- spring-mass-damper and virtual-wall simulations;
+- actuator taxonomy and comparison tables;
+- haptic rendering pipeline and control-loop diagrams;
+- psychometric-function demonstrations;
+- texture-space and machine-learning pipeline diagrams;
+- experiment-design flowcharts;
+- co-registration and volumetric-haptics diagrams.
+
+REVIEW STATES
+outline -> draft -> internal-review -> revised -> approved -> published
+
+DEVELOPMENT SAFETY RULES
+1. Do not merge the course into main before approval.
+2. Do not change the GitHub Pages publishing source.
+3. Do not add a visible link from the live portfolio.
+4. Keep chapters private and marked as drafts during development.
+5. Use local or branch-based review only.
+6. Preserve the private-draft banner and noindex metadata.
+7. Verify references, links, diagrams, accessibility, and responsive behaviour before publication.
+8. Request explicit approval before any live deployment.
+
+CURRENT BUILD STATUS
+- 24 chapter drafts created.
+- Five-part landing page created.
+- Dynamic chapter reader created.
+- Chapter search and filters created.
+- Seven research pathways created.
+- Searchable glossary created.
+- Reference and exercise metadata created.
+- Editing and private-preview documentation created.
+- Scientific, reference, editorial, diagram, and student review remain pending.
