@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Reading a psychometric function</title>
+  <desc id="desc">An S-shaped psychometric curve plots proportion correct against stimulus difference for a two-alternative forced-choice task. It labels chance performance at 0.5, a conventional 75 percent threshold, slope, lapse region, and uncertainty around measured points.</desc>
+  <defs>
+    <style>
+      .bg{fill:#fffdf8}.axis{stroke:#152421;stroke-width:4}.grid{stroke:#c9c7be;stroke-width:1.5;stroke-dasharray:7 7}.curve{stroke:#215f5a;stroke-width:7;fill:none}.band{fill:#dce7df;opacity:.8}.point{fill:#d95d45;stroke:#fffdf8;stroke-width:3}.threshold{stroke:#a73d2c;stroke-width:3;stroke-dasharray:10 8}.label{font:17px system-ui,sans-serif;fill:#5d6864}.title{font:700 21px system-ui,sans-serif;fill:#152421}.eyebrow{font:800 16px system-ui,sans-serif;letter-spacing:2px;fill:#a73d2c}.note{fill:#f5f2ea;stroke:#c9c7be;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="720" rx="28"/>
+  <text x="55" y="58" class="eyebrow">A THRESHOLD IS DEFINED ON A RESPONSE FUNCTION</text>
+  <g transform="translate(120 110)">
+    <line class="axis" x1="0" y1="480" x2="900" y2="480"/>
+    <line class="axis" x1="0" y1="480" x2="0" y2="0"/>
+    <line class="grid" x1="0" y1="240" x2="900" y2="240"/>
+    <line class="grid" x1="0" y1="120" x2="900" y2="120"/>
+    <line class="threshold" x1="520" y1="480" x2="520" y2="238"/>
+    <line class="threshold" x1="0" y1="240" x2="520" y2="240"/>
+
+    <path class="band" d="M80 452C245 451 332 434 407 371C472 317 510 226 556 151C617 52 720 30 870 24L870 60C727 67 645 88 593 174C548 249 506 348 434 406C355 471 243 485 80 482Z"/>
+    <path class="curve" d="M80 467C245 466 333 450 420 385C493 331 523 222 574 147C631 62 720 45 870 42"/>
+
+    <g>
+      <circle class="point" cx="170" cy="457" r="9"/><line x1="170" y1="438" x2="170" y2="476" stroke="#d95d45" stroke-width="3"/>
+      <circle class="point" cx="300" cy="433" r="9"/><line x1="300" y1="404" x2="300" y2="462" stroke="#d95d45" stroke-width="3"/>
+      <circle class="point" cx="420" cy="382" r="9"/><line x1="420" y1="345" x2="420" y2="419" stroke="#d95d45" stroke-width="3"/>
+      <circle class="point" cx="520" cy="240" r="9"/><line x1="520" y1="204" x2="520" y2="276" stroke="#d95d45" stroke-width="3"/>
+      <circle class="point" cx="620" cy="115" r="9"/><line x1="620" y1="84" x2="620" y2="146" stroke="#d95d45" stroke-width="3"/>
+      <circle class="point" cx="750" cy="58" r="9"/><line x1="750" y1="38" x2="750" y2="78" stroke="#d95d45" stroke-width="3"/>
+    </g>
+
+    <text x="-22" y="485" text-anchor="end" class="label">0.50</text>
+    <text x="-22" y="245" text-anchor="end" class="label">0.75</text>
+    <text x="-22" y="125" text-anchor="end" class="label">0.90</text>
+    <text x="-22" y="25" text-anchor="end" class="label">1.00</text>
+    <text x="450" y="540" text-anchor="middle" class="title">Stimulus difference or intensity</text>
+    <text x="-80" y="250" transform="rotate(-90 -80 250)" text-anchor="middle" class="title">Proportion correct</text>
+    <text x="520" y="515" text-anchor="middle" class="title">criterion-defined threshold</text>
+    <text x="70" y="454" class="label">chance region in 2AFC</text>
+    <text x="660" y="190" class="label">slope reflects how rapidly</text><text x="660" y="212" class="label">performance changes</text>
+    <text x="735" y="93" class="label">lapses can limit the upper asymptote</text>
+  </g>
+  <rect class="note" x="145" y="645" width="910" height="46" rx="14"/>
+  <text x="600" y="674" text-anchor="middle" class="label">The green band represents uncertainty. The selected criterion must be stated; “the threshold” is not self-defining.</text>
+</svg>
