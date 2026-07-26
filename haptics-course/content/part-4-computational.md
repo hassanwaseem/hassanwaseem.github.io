@@ -1,321 +1,928 @@
 <!-- CHAPTER:15 -->
 # Computational Haptic Modelling
-LEAD: A computational haptic model represents how an object or environment responds to interaction and how that response should be converted into perceptually meaningful device output.
+LEAD: A computational haptic model represents how an object, body, or environment changes during interaction and how those changes should be converted into device output.
+
+## How to read this chapter
+A model is a purposeful abstraction. Its quality depends on the decision it supports: stable real-time contact, perceptual similarity, prediction of material attributes, remote interaction, or scientific explanation.
+
+Do not ask whether a model is “accurate” in general. Ask which variables it predicts, at what rate, over what range, with what uncertainty, and for which device and task.
 
 ## Learning objectives
-- Compare physical, empirical, data-driven, and object-centric models.
-- Represent contact, stiffness, constraints, deformation, texture, and internal state.
+- Distinguish physical, empirical, data-driven, perceptual, and hybrid models.
+- Represent geometry, contact, stiffness, damping, friction, texture, deformation, and object state.
 - Separate object behaviour from device-specific rendering.
-- Evaluate model fidelity, latency, stability, and perceptual coherence.
+- Explain model order, state, parameter identification, and observability.
+- Design multi-rate and model-mediated architectures.
+- Validate numerical, physical, perceptual, and functional performance.
 
-## 1. Why model haptic behaviour?
-A model allows a system to respond to novel user actions rather than replaying fixed effects. It may predict force from penetration, vibration from surface scanning, deformation from load, or a multimodal response from an object state.
+## 1. What a model contains
+A model usually defines:
 
-Models serve different purposes: scientific explanation, real-time rendering, compression, prediction, authoring, and control. The simplest model that supports the intended claim is normally preferable.
+- **inputs:** position, velocity, force, contact, time, image, audio, or context;
+- **state:** variables carrying history, such as deformation, temperature, damage, or contact mode;
+- **parameters:** stiffness, damping, friction, geometry, learned weights;
+- **outputs:** force, displacement, vibration, pressure, predicted percept, or next state;
+- **update rule:** continuous differential equations or discrete transitions.
+
+A state-space form is:
+
+$$x_{t+1} = f(x_t, u_t, θ)$$
+
+$$y_t = g(x_t, u_t, θ)$$
+
+where `x` is state, `u` input, `θ` parameters, and `y` output.
 
 ## 2. Physical models
-Physical models derive output from mechanics. A spring-damper model can represent compliance; finite-element models can represent deformation; contact models can represent collision and friction. Physical models provide interpretable parameters but may be computationally expensive or require material properties that are difficult to measure.
+Physical models use mechanics, acoustics, thermodynamics, electromagnetics, or contact theory.
 
-Real-time haptics often uses reduced-order or approximate models with bounded computation time.
+Advantages:
 
-## 3. Empirical and signal models
-An empirical model fits measured input-output relations without fully simulating the underlying physics. Examples include frequency-response models, lookup tables, or texture signals indexed by speed and force.
+- interpretable parameters;
+- explicit constraints and conservation laws;
+- possible extrapolation when assumptions remain valid.
 
-These models can reproduce measured behaviour efficiently but may extrapolate poorly beyond the calibration range.
+Limitations:
 
-## 4. Data-driven models
-Machine-learning models can map images, geometry, motion, force, or context to haptic output. They can capture nonlinear and multimodal relations but depend on dataset coverage, split design, uncertainty, and deployment latency.
+- computational cost;
+- unmeasured parameters;
+- idealized geometry and material assumptions;
+- difficult modelling of skin, friction, and complex devices.
 
-A model that predicts a sensor waveform is not automatically a perceptual model. Perceptual targets or validation are required when the claim concerns what users feel.
+## 3. Empirical and parametric models
+Empirical models fit simple functions to observed behaviour. Examples include nonlinear force–displacement curves, frequency-response functions, and speed-dependent friction.
 
-## 5. Object-centric state
-An object-centric representation gives each virtual object internal variables such as:
+They can be efficient and accurate within the measured domain but should not be extrapolated without evidence.
 
-- contact state and contact points;
-- stiffness and damping;
-- deformation history;
-- friction and slip state;
-- constraints and breakage;
-- texture and temperature;
-- confidence or uncertainty.
+## 4. Finite-element and continuum models
+Finite-element methods discretize deformable bodies. They can model complex geometry and material behaviour but may be too slow for high-rate haptic rendering.
 
-User action updates the state. A separate rendering layer maps the state to available actuators. This separation makes the object behaviour portable across devices and supports consistent multimodal output.
+Strategies include:
 
-## 6. Cue scheduling
-A system may have limited actuators or bandwidth. Cue scheduling determines which modality represents which property and when cues should be combined. A contact event might use ultrasound for location, vibration for impact, and a tether for resistance. Scheduling should prevent contradictory cues, overload, and unsafe output.
+- coarser meshes;
+- reduced-order bases;
+- precomputed deformation modes;
+- local contact models;
+- parallel computation;
+- a fast proxy coupled to a slower solver.
 
-## 7. Real-time requirements
-Models must meet bounded update times. Different outputs may need different rates: object-state prediction may run tens of times per second, while texture or force rendering may require hundreds or thousands of updates per second. Use asynchronous architecture carefully so that state and output remain synchronized.
+## 5. Reduced-order models
+A reduced-order model retains dominant dynamics with fewer variables. Reduction can be physics-based or data-driven.
 
-## 8. Worked example: state-based virtual block
-A virtual block stores contact, compression, slip, and fracture states. Finger motion updates compression. The object model generates target normal force and slip events. A rendering layer maps normal force to a cable device and slip to vibration. If the force device saturates, the renderer preserves event timing while reducing magnitude and records the limitation.
+Validate whether removed modes matter for contact stability, transient feel, or local deformation.
+
+## 6. Object-centric state models
+An object-centric haptic model stores properties independent of a specific actuator.
+
+Possible state variables:
+
+- contact and separation;
+- rigid or compliant mode;
+- local stiffness and damping;
+- deformation and recovery;
+- slip, stick, and friction state;
+- surface texture identity;
+- temperature;
+- damage, puncture, fracture, or fill level.
+
+A renderer then maps object state to available device channels.
+
+This separation supports reuse across grounded, wearable, and contactless devices, but the mapping must acknowledge that devices cannot reproduce identical physical evidence.
+
+## 7. Hybrid models
+Hybrid models combine continuous dynamics with discrete transitions. Examples:
+
+- free space → contact → slip → release;
+- intact membrane → puncture → post-puncture drag;
+- elastic deformation → yield → permanent deformation.
+
+A hybrid state machine helps prevent ambiguous cue scheduling.
+
+## 8. Parameter identification
+Parameter identification estimates model parameters from measurements.
+
+A defensible process includes:
+
+1. define the model and identifiable parameters;
+2. design excitations that reveal those parameters;
+3. measure inputs and outputs with synchronized sensors;
+4. fit parameters using a stated loss function;
+5. inspect residual structure;
+6. validate on held-out trajectories;
+7. report uncertainty and parameter correlation.
+
+A good numerical fit does not prove that the parameters correspond uniquely to physical properties.
+
+## 9. Observability and identifiability
+A state is **observable** if available measurements allow it to be inferred. Parameters are **identifiable** if distinct values produce distinguishable data under the experiment.
+
+If stiffness and damping are both estimated from slow quasi-static motion, damping may be poorly identifiable. The experiment must excite relevant dynamics.
+
+## 10. Model-mediated rendering
+In teleoperation or expensive simulation, a local model can render fast contact while slower updates correct model state. This reduces perceived delay but introduces model mismatch.
+
+The system must manage:
+
+- update discontinuities;
+- divergence between model and remote environment;
+- uncertainty;
+- safe correction;
+- user trust when predictions are wrong.
+
+## 11. Multi-rate cue scheduling
+Different haptic components require different rates.
+
+- geometry and boundary constraints may update rapidly;
+- object deformation may update more slowly;
+- texture vibration requires high temporal bandwidth;
+- semantic or physiological state may update at tens of hertz.
+
+A multi-rate model should define synchronization, interpolation, and transition smoothing.
+
+## 12. Device-specific rendering
+A device-independent object model still requires a renderer.
+
+Example object state: “rough rigid surface with increasing slip.”
+
+- grounded device: friction force plus vibration;
+- wearable: skin stretch plus vibration;
+- ultrasound: moving focal points and amplitude modulation;
+- visual pseudo-haptics: control–display gain change.
+
+These outputs are not physically equivalent. Validation should target task-relevant percepts rather than assume equivalence.
+
+## 13. Uncertainty
+Models should expose uncertainty when predictions affect safety or interpretation.
+
+Sources include:
+
+- sensor noise;
+- parameter uncertainty;
+- unmodelled dynamics;
+- user variation;
+- out-of-distribution objects;
+- numerical approximation.
+
+Uncertainty can inform conservative control, fallback cues, or requests for additional sensing.
+
+## 14. Worked example: puncture model
+A membrane-puncture model may use states:
+
+1. no contact;
+2. elastic loading;
+3. rupture event;
+4. post-puncture friction.
+
+Inputs: tool position and velocity. Outputs: axial force and a transient event.
+
+Validation layers:
+
+- compare force–displacement curves with physical samples;
+- compare rupture-force distribution;
+- test puncture detection and realism;
+- evaluate whether trainees learn force regulation;
+- test new membrane thicknesses.
+
+## 15. Model evaluation
+### Numerical
+Error, convergence, stability, runtime.
+
+### Physical
+Force, displacement, spectrum, latency, energy.
+
+### Perceptual
+Detection, discrimination, matching, realism.
+
+### Functional
+Task performance and transfer.
+
+### Generalization
+New conditions, users, objects, devices, and long-term state.
 
 ## Common misconceptions
-- A more complex model is not automatically more realistic.
-- Object behaviour and actuator command should not be conflated.
-- Low average inference time does not guarantee bounded latency.
-- Signal prediction accuracy does not establish perceptual validity.
+- A more complex model is always more realistic.
+- A low numerical error guarantees perceptual fidelity.
+- Device-independent representation eliminates device effects.
+- Parameters fitted from one trajectory are uniquely identified.
+- A local predictive model removes network delay without trade-offs.
+- Hidden state can be inferred without informative sensing.
 
 ## Key takeaways
-- Models should be selected for a defined task and claim.
-- Object state can separate interaction logic from device rendering.
-- Real-time haptics requires bounded latency and synchronized outputs.
-- Physical, data-driven, and perceptual evaluation are complementary.
+- Models are defined by inputs, state, parameters, outputs, and purpose.
+- Physical, empirical, learned, and hybrid models have complementary strengths.
+- Object state should be separated from device rendering where useful.
+- Identification requires informative experiments and held-out validation.
+- Multi-rate architectures connect fast contact to slower state models.
+- Numerical, physical, perceptual, and task validation are distinct.
 
 ## Self-test
-1. What distinguishes a physical model from an empirical model?
-2. Why separate object state and rendering?
-3. What is cue scheduling?
-4. Why is worst-case latency important?
-5. When can a lookup table be preferable to a neural network?
+1. What distinguishes state from parameter?
+2. Why can two parameters be unidentifiable?
+3. What is a reduced-order model?
+4. Why use a hybrid state machine?
+5. What problem does model-mediated rendering address?
+6. Why does device-independent modelling not imply perceptual equivalence?
+7. Name four validation levels.
 
 ## Practical exercise
-Define an object-state model for a virtual sponge. List state variables, update rules, sensor inputs, outputs, actuator mappings, uncertainty, update rates, and validation tasks.
+Create a state model for a virtual sponge that can be contacted, compressed, held, released, and permanently damaged. Define states, inputs, parameters, outputs, transition rules, sensing, and validation.
+
+## Recommended reading
+- [R20] Data-driven texture modelling.
+- [R22] Passivity and haptic control.
+- [R23] Stable teleoperation under delay.
 
 <!-- CHAPTER:16 -->
 # Machine Learning for Haptics
-LEAD: Machine learning can predict haptic signals, perceptual attributes, object states, or control actions. Valid claims require carefully structured datasets, baselines, splits, uncertainty, and perceptual evaluation.
+LEAD: Machine learning can map signals, images, object state, and human judgments to haptic predictions or rendering parameters. Its value depends less on model size than on data design, split integrity, baselines, uncertainty, and human validation.
 
 ## Learning objectives
-- Formulate haptic classification, regression, generation, and sequence-prediction problems.
-- Design leakage-resistant datasets and splits.
-- Compare feature-based, convolutional, recurrent, and encoder-decoder models.
-- Evaluate generalization and perceptual relevance.
+- Frame haptic tasks as classification, regression, generation, or representation learning.
+- Design train, validation, and test splits that match the generalization claim.
+- Represent time-series and multimodal haptic data.
+- Compare classical baselines with CNN, recurrent, transformer, and encoder–decoder models.
+- Detect leakage, imbalance, overfitting, and shortcut learning.
+- Evaluate predictions numerically and perceptually.
 
-## 1. Define the target
-Possible targets include:
+## 1. Define the prediction problem
+Examples:
 
-- material or event class;
-- force, vibration, or deformation time series;
-- perceptual attributes such as roughness or hardness;
-- contact or slip state;
-- actuator command;
-- user performance or preference.
+- classify material from vibration and force;
+- predict roughness rating from an image;
+- estimate contact state from sensors;
+- generate a texture waveform from movement;
+- predict device commands from object state;
+- learn a perceptual embedding;
+- adapt rendering across users.
 
-The target determines labels, loss functions, sampling, and validation. Predicting a device command may reproduce one apparatus but fail to represent the underlying object.
+Specify input, output, prediction horizon, unit of generalization, and use in the real-time system.
 
-## 2. Input representation
-Haptic inputs may include force, torque, acceleration, position, audio, image features, geometry, motor current, pressure maps, and user context. Raw time series preserve information but require more data. Engineered features can improve interpretability and data efficiency.
+FIGURE: assets/figures/15-computational-ml-evaluation.svg | End-to-end computational and machine-learning pipeline with train, validation, held-out test, rendering, and human validation. | **Figure 16.1 — Model evaluation must match the claimed generalization.** Random window splits can leak object or participant identity. Original course diagram; CC BY 4.0.
 
-Signals should be synchronized, calibrated, normalized, and segmented using rules that do not leak labels.
+## 2. Data units and leakage
+The split unit is critical.
 
-## 3. Model families
-- **Linear and tree models:** strong interpretable baselines.
-- **1D convolutional networks:** learn local temporal patterns.
-- **RNNs and LSTMs:** model sequential dependencies.
-- **Encoder-decoder networks:** map one sequence or modality to another.
-- **Transformers:** model long-range relations but can be data intensive.
-- **Multimodal fusion models:** combine signals at early, intermediate, or late stages.
+If many windows come from the same recording, randomly splitting windows lets nearly identical data appear in train and test. Test performance then measures interpolation within a recording, not generalization to new objects or users.
 
-Model choice should be justified against simpler baselines.
+Possible split units:
 
-## 4. Dataset splits
-Random trial splits can leak surface, user, device, or session identity. Stronger tests hold out the unit relevant to the claim:
+- trial;
+- recording session;
+- participant;
+- object;
+- material class;
+- device;
+- laboratory;
+- time period.
 
-- leave-one-surface-out;
-- leave-one-user-out;
-- leave-one-session-out;
-- cross-device or cross-laboratory evaluation;
-- unseen speed, force, or trajectory ranges.
+Choose the unit that matches the claim.
 
-State the unit of independence and prevent repeated measurements of the same item from appearing in both training and test sets.
+## 3. Time-series representation
+Haptic data may include force, acceleration, position, velocity, audio, pressure arrays, and event labels.
 
-## 5. Loss functions and metrics
-Signal metrics include MAE, RMSE, correlation, spectral distance, and event timing. Classification uses accuracy, balanced accuracy, F1, calibration, and confusion matrices. Perceptual targets may need ordinal losses or attribute-specific weighting.
+Representations include:
 
-No single physical metric guarantees perceptual equivalence. Human evaluation remains necessary for rendering claims.
+- raw samples;
+- engineered time-domain features;
+- FFT or power spectra;
+- spectrograms;
+- wavelets;
+- event sequences;
+- multichannel synchronized windows.
 
-## 6. Uncertainty and failure
-A deployed model should detect inputs outside its training distribution and expose uncertainty. Unsafe extrapolation should trigger conservative output, fallback models, or no actuation. Analyze failure by user, surface, condition, and body site rather than only average performance.
+Window length determines which events and frequencies are visible.
 
-## 7. Reproducibility
-Release data dictionaries, preprocessing, splits, seeds, model configurations, training logs, evaluation scripts, and license information. Report compute resources and inference latency on the deployment hardware.
+## 4. Classical baselines
+Always compare against suitable simple models:
 
-## Worked example: predicting texture attributes from images
-Images are paired with perceptual ratings for rough–smooth, flat–bumpy, sticky–slippery, and hard–soft. A model predicts attributes for unseen surfaces. A valid split holds out complete physical surfaces, not just images of the same surface. Evaluation includes attribute error, ranking, uncertainty, and a perceptual study comparing predicted and measured relationships.
+- linear or logistic regression;
+- nearest neighbour;
+- support-vector machines;
+- random forests;
+- spectral-feature regression;
+- physical or heuristic models;
+- mean or majority predictors.
+
+A deep model that only matches a simple baseline adds complexity without evidence of value.
+
+## 5. Convolutional models
+One-dimensional CNNs can learn local temporal features. Two-dimensional CNNs can process time–frequency representations or pressure images.
+
+Check whether convolutional receptive fields cover the relevant event duration.
+
+## 6. Recurrent and sequence models
+RNNs, GRUs, and LSTMs model sequential dependencies. They can represent history-dependent friction, deformation, or gesture.
+
+Limitations include training difficulty, latency, and hidden-state drift.
+
+## 7. Transformers and attention
+Attention models can integrate long sequences and multimodal tokens. They require careful data scale, positional encoding, latency analysis, and comparison with smaller models.
+
+Attention weights should not automatically be interpreted as causal explanations.
+
+## 8. Encoder–decoder and generative models
+Encoder–decoder models can map input modalities to haptic output. Generative models can synthesize waveforms or tactile patterns.
+
+Evaluation should include:
+
+- physical plausibility;
+- temporal continuity;
+- diversity without instability;
+- conditioning accuracy;
+- device limits;
+- perceptual quality;
+- failure under novel inputs.
+
+## 9. Multimodal fusion
+Fusion strategies include:
+
+- early fusion of aligned features;
+- late fusion of predictions;
+- cross-modal attention;
+- shared latent representations;
+- missing-modality training.
+
+Time synchronization is essential. A high-performing model may exploit actuator sound or visual background rather than the intended haptic mechanism.
+
+## 10. Labels and human judgments
+Human labels contain variability, context, and scale-use differences. Preserve participant-level structure when possible.
+
+For perceptual ratings:
+
+- report reliability;
+- model rater variation;
+- avoid treating consensus as ground truth without uncertainty;
+- test whether prediction errors are perceptually meaningful.
+
+## 11. Data augmentation
+Augmentation must preserve the task label.
+
+Potential operations:
+
+- small amplitude scaling;
+- time shift;
+- realistic noise;
+- speed transformation grounded in physics;
+- sensor-axis rotation where valid.
+
+Arbitrary time stretching or frequency shifting may change perceived texture and invalidate labels.
+
+## 12. Metrics
+Classification metrics include accuracy, balanced accuracy, precision, recall, F1, confusion matrix, and calibration.
+
+Regression metrics include MAE, RMSE, correlation, and interval coverage.
+
+A high correlation can coexist with large bias. Report multiple metrics and uncertainty.
+
+## 13. Model calibration and uncertainty
+A calibrated probability reflects empirical likelihood. Uncertainty methods include ensembles, Bayesian approximations, quantile regression, and conformal intervals.
+
+Uncertainty is useful for detecting out-of-distribution inputs and selecting conservative output.
+
+## 14. Ablation and interpretation
+Ablations test which inputs, features, or components contribute.
+
+Examples:
+
+- remove force channel;
+- remove image input;
+- remove mechanoreceptor-inspired filtering;
+- replace learned renderer with baseline playback;
+- test speed conditioning.
+
+Interpretation should be tied to falsifiable hypotheses.
+
+## 15. Real-time deployment
+Measure:
+
+- inference latency and jitter;
+- memory and power;
+- startup and hidden-state behaviour;
+- robustness to missing samples;
+- numerical precision;
+- output saturation;
+- safe fallback.
+
+Offline accuracy is insufficient for closed-loop haptics.
+
+## 16. Perceptual loss and human validation
+A sample-wise waveform loss may penalize harmless phase changes while ignoring perceptually important structure.
+
+Perceptual objectives can use:
+
+- frequency-weighted error;
+- feature-space error;
+- learned embeddings;
+- human similarity judgments;
+- task-specific performance.
+
+Ultimately, human evaluation is required when the claim concerns experience.
+
+## 17. Worked example: image-to-texture prediction
+1. collect images, physical texture signals, and ratings;
+2. split by held-out physical objects;
+3. establish image-feature and mean-rating baselines;
+4. train a model to predict attributes or latent texture state;
+5. quantify uncertainty;
+6. render predicted output through a device model;
+7. test held-out-object perceptual similarity;
+8. report objects and attributes where vision is insufficient.
 
 ## Common misconceptions
-- More samples do not help if they are repeated measurements of the same few objects.
-- High test accuracy can result from leakage.
-- Deep learning is not automatically superior to calibrated baselines.
-- Signal similarity is not equivalent to perceptual similarity.
+- More windows mean more independent samples.
+- High test accuracy proves generalization to new users or objects.
+- Deep learning removes the need for physical understanding.
+- Attention weights prove causality.
+- A low waveform error guarantees perceptual similarity.
+- Human ratings are noise-free labels.
+- Offline inference time represents real-time latency.
 
 ## Key takeaways
-- Define the intended generalization before collecting data.
-- Splits must match the scientific claim.
-- Include simple baselines and uncertainty.
-- Perceptual validation is required for perceptual claims.
+- Define the prediction target and unit of generalization first.
+- Prevent leakage by splitting at object, participant, session, or device level as required.
+- Compare with simple and physical baselines.
+- Evaluate uncertainty, calibration, ablations, and failures.
+- Real-time constraints are part of model performance.
+- Human validation is required for perceptual claims.
 
 ## Self-test
-1. What unit should be held out for unseen-surface generalization?
-2. Why can random trial splits leak information?
-3. When is a 1D CNN appropriate?
-4. What should happen outside the training distribution?
-5. Why report deployment latency?
+1. Why is random window splitting dangerous?
+2. When is a spectrogram useful?
+3. What is the role of a validation set?
+4. Why use simple baselines?
+5. How can augmentation invalidate labels?
+6. What does calibration measure?
+7. Why is RMSE insufficient alone?
+8. What should be measured for deployment?
 
 ## Practical exercise
-Design a machine-learning benchmark for predicting impact feedback from motion and force signals. Specify target, inputs, synchronization, splits, baselines, metrics, uncertainty, and human evaluation.
+Design a model predicting perceived roughness from acceleration and scan speed. Specify split unit, features, baseline, architecture, metrics, uncertainty, runtime test, and human validation.
+
+## Evidence and source notes
+Data-driven texture rendering demonstrates interaction-conditioned learning from physical signals. [R20] Image-based prediction of haptic attributes illustrates cross-modal modelling and held-out-object evaluation. [R19]
 
 ## Recommended reading
-- [R19] Hassan et al., haptic attribute prediction using 1D-CNN.
-- [R20] Culbertson et al., data-driven texture modelling.
+- [R19] Image features and haptic texture attributes.
+- [R20] Data-driven texture rendering.
+- [R37] Recent vibration-to-perception neural prediction as an example of model and human-rating integration.
 
 <!-- CHAPTER:17 -->
 # Designing Haptic Experiments
-LEAD: A strong haptics experiment connects a precise perceptual or interaction question to calibrated stimulation, controlled procedures, appropriate analysis, and transparent reporting.
+LEAD: A haptic experiment should connect a precise research claim to controlled physical stimulation, participant behaviour, and an analysis that preserves uncertainty and scope.
 
 ## Learning objectives
-- Formulate variables, hypotheses, and estimands.
-- Choose within-subject, between-subject, factorial, or psychophysical designs.
-- Plan randomization, counterbalancing, power, and exclusions.
-- Preregister and document a reproducible protocol.
+- Convert broad questions into testable constructs and hypotheses.
+- Select within-, between-, and mixed designs.
+- Apply randomization, counterbalancing, masking, and blinding.
+- Plan sample size and repeated measures.
+- Separate manipulation checks, primary outcomes, and exploratory measures.
+- Design ethical, preregistered, reproducible studies.
 
-## 1. From question to estimand
-A research question should identify the population, manipulation, comparison, outcome, and context. An estimand states what effect is to be estimated, such as the mean within-participant difference in path error between visual-only and visual-plus-haptic conditions.
+## 1. Start with the claim
+Examples of different claims:
 
-Avoid vague questions such as “Does haptics improve immersion?” Define which haptic system, task, measure, and baseline are involved.
+- the device generates 1 N accurately;
+- users detect the cue;
+- cue A feels stronger than B;
+- the system improves target selection;
+- training transfers to a physical task;
+- an effect generalizes across body sites.
 
-## 2. Independent and dependent variables
-Independent variables include device condition, frequency, force, delay, body site, modality, and task. Dependent variables may include threshold, accuracy, completion time, force error, workload, comfort, realism, or preference.
+Each requires different evidence.
 
-Manipulation checks verify that the intended physical or perceptual difference occurred. For example, measured acceleration can confirm output, while a discrimination task can confirm that conditions were perceptually distinct.
+## 2. Construct and operationalization
+A **construct** is the concept of interest: realism, stiffness, comfort, ownership, workload, skill, trust.
 
-## 3. Within- and between-subject designs
-Within-subject designs improve power by comparing each participant with themselves but are vulnerable to learning, fatigue, carryover, and demand effects. Between-subject designs avoid some carryover but require more participants and careful group equivalence.
+Operationalization defines how it is measured. “Realism” might be a rating, forced-choice comparison, or match to a physical reference. These are not equivalent.
 
-Mixed designs can separate repeated technical conditions from participant-group differences.
+CALLOUT: Design rule | Define one primary outcome that directly answers the research question. Additional measures should have explicit roles rather than being collected because they are convenient.
 
-## 4. Randomization and counterbalancing
-Randomize trial order when order is not part of the hypothesis. Counterbalance condition blocks using Latin squares or balanced sequences. Separate practice from recorded trials and define retraining procedures.
+## 3. Independent and dependent variables
+Independent variables are manipulated or classified factors. Dependent variables are measured outcomes.
 
-Full counterbalancing may be impossible with many conditions; report the method used and test for residual order effects.
+Also identify:
 
-## 5. Sample size
-Determine sample size from the primary estimand, expected effect, variability, design, and acceptable error. Pilot data can estimate feasibility and variance but may give unstable effect sizes. Sequential or Bayesian designs require predefined stopping rules.
+- covariates;
+- nuisance variables;
+- random effects such as participant and object;
+- mediators and moderators;
+- manipulation checks.
 
-“Similar to earlier studies” is insufficient without relating the earlier design and outcome to the present one.
+## 4. Within-subject designs
+Every participant experiences all conditions.
 
-## 6. Blinding and confounds
-Participants may hear actuators, see device motion, feel heat, or infer condition from setup. Experimenters may influence timing or instructions. Use masking, standardized scripts, automated presentation, and blinded coding where practical.
+Advantages:
 
-Measure unintended cues when they cannot be eliminated.
+- controls stable individual differences;
+- often higher statistical power;
+- useful for perceptual comparisons.
 
-## 7. Subjective and objective outcomes
-Objective performance and subjective experience answer different questions. A device may improve accuracy while reducing comfort, or increase realism without improving learning. Use validated questionnaires where appropriate and preserve item-level interpretation.
+Limitations:
 
-## 8. Ethics and data management
-Obtain ethics approval before recruitment when required. Provide informed consent, withdrawal procedures, risk information, and data-protection measures. Minimize collection of identifiable data. Define retention, anonymization, and sharing before the study begins.
+- learning, fatigue, adaptation, and carryover;
+- longer sessions;
+- need for counterbalancing.
 
-## 9. Preregistration and reporting
-A preregistration can include hypotheses, primary outcomes, sample size, exclusions, randomization, models, contrasts, and stopping rules. Deviations are permissible when transparently reported as exploratory.
+## 5. Between-subject designs
+Participants experience different conditions.
 
-Release calibrated stimuli, code, device descriptions, and anonymized data when legal and ethical constraints allow.
+Advantages:
 
-## Worked example: visual versus haptic boundary localization
-Participants move a tracked finger to locate a virtual boundary under visual-only and visual-plus-haptic conditions. The primary outcome is absolute localization error. Conditions are within-subject and counterbalanced. Physical co-registration is measured before each block. A secondary outcome is workload. The analysis estimates the paired condition effect with uncertainty and checks whether drift predicts error.
+- avoids some carryover;
+- simpler exposure for training interventions.
+
+Limitations:
+
+- more participants;
+- greater sensitivity to group imbalance;
+- individual variability can obscure effects.
+
+## 6. Mixed and repeated-measures designs
+Mixed designs combine within- and between-subject factors. Analysis should reflect repeated measurements and crossed factors such as participant and object.
+
+Avoid treating repeated trials as independent participants.
+
+## 7. Randomization and counterbalancing
+Randomize trial order where appropriate. Counterbalance condition blocks to distribute order effects.
+
+For many conditions, use Latin squares or algorithmic balanced orders rather than every permutation.
+
+Randomization should be reproducible through stored seeds and trial logs.
+
+## 8. Blinding and masking
+Participants or experimenters may infer condition from sound, device motion, appearance, or procedure.
+
+Possible controls:
+
+- conceal device settings;
+- use auditory masking;
+- automate trial presentation;
+- standardize instructions;
+- blind analysts to condition labels;
+- include sham or placebo-like feedback where ethical and meaningful.
+
+## 9. Training and familiarization
+Novel haptic cues require training. Define:
+
+- instruction format;
+- practice trials;
+- feedback during practice;
+- performance criterion;
+- whether training stimuli overlap test stimuli.
+
+Training can create expertise specific to the experiment, so report it fully.
+
+## 10. Sample size
+Sample-size planning depends on design, expected effect, variability, desired precision, and analysis.
+
+Use prior data or pilot estimates cautiously. Small pilots produce unstable effect sizes. Precision-based planning may be more defensible than targeting a large uncertain effect.
+
+## 11. Psychophysics versus HCI task evaluation
+Psychophysics isolates perceptual relationships. HCI evaluation examines interaction in context.
+
+A complete project may need both:
+
+1. controlled threshold or discrimination study;
+2. realistic task study;
+3. longitudinal or transfer study.
+
+## 12. Baselines
+Choose baselines that test the mechanism.
+
+Examples:
+
+- no feedback;
+- visual only;
+- audio only;
+- conventional vibration;
+- physical reference;
+- another algorithm;
+- matched-intensity control;
+- delayed or spatially incongruent cue.
+
+A weak baseline can exaggerate novelty.
+
+## 13. Objective and subjective measures
+Objective measures include error, force, time, trajectory, success, and physiological data.
+
+Subjective measures include intensity, comfort, realism, preference, workload, presence, and ownership.
+
+Subjective does not mean invalid, but the construct and scale must be appropriate.
+
+## 14. Questionnaire use
+Use validated instruments when they match the construct and population. Do not modify item wording without acknowledging that validity evidence may no longer apply.
+
+Report individual items or justified subscales rather than averaging unrelated questions.
+
+## 15. Exclusions and missing data
+Define before analysis:
+
+- sensor failure;
+- incomplete sessions;
+- noncompliance;
+- performance below training criterion;
+- outlier treatment;
+- missing-response handling.
+
+Report counts and reasons by condition.
+
+## 16. Preregistration
+Preregistration records hypotheses, design, primary outcomes, exclusions, and analysis before observing results. It does not prevent exploration; it distinguishes confirmatory and exploratory analysis.
+
+## 17. Ethics and stopping rules
+Haptic studies can involve force, vibration, heat, electrical stimulation, sound, motion, fatigue, or clinical populations.
+
+Define:
+
+- exposure limits;
+- contraindications;
+- emergency stop;
+- participant-controlled withdrawal;
+- adverse-event recording;
+- data privacy;
+- deception and debriefing.
+
+## 18. Worked example: evaluating a texture renderer
+Primary claim: speed-conditioned rendering improves similarity to real textures.
+
+Design:
+
+- within-subject;
+- factors: renderer and speed;
+- physical reference trials;
+- similarity forced choice as primary measure;
+- roughness rating as secondary;
+- matched output-level control;
+- randomized trials and counterbalanced blocks;
+- participant and texture as random effects;
+- preregistered exclusions;
+- held-out textures.
+
+## 19. Reporting
+Provide enough detail to reproduce:
+
+- hardware and software versions;
+- body interface;
+- calibration;
+- stimuli;
+- trial sequence;
+- raw and processed measures;
+- analysis code;
+- exclusions;
+- deviations;
+- data and material availability.
 
 ## Common misconceptions
-- More dependent variables do not strengthen a study.
-- Within-subject design does not remove order effects.
-- Statistical significance does not establish practical importance.
-- A pilot study is not automatically a powered confirmatory study.
+- More dependent variables make a study stronger.
+- Within-subject designs need no counterbalancing.
+- Repeated trials increase participant sample size.
+- A validated questionnaire remains validated after arbitrary modification.
+- Statistical significance proves practical benefit.
+- A pilot effect size is a reliable power estimate.
+- Preregistration prevents exploratory research.
 
 ## Key takeaways
-- Define the estimand before selecting the test.
-- Calibrate and verify the manipulation.
-- Control order, learning, fatigue, and unintended cues.
-- Separate confirmatory and exploratory analyses.
-- Make the protocol reproducible.
+- Match claim, construct, manipulation, measure, and analysis.
+- Separate physical, perceptual, and task evidence.
+- Control order, learning, sound, posture, and device variation.
+- Treat participant and object variability explicitly.
+- Define primary outcomes, exclusions, and stopping rules before analysis.
+- Report enough detail for replication.
 
 ## Self-test
-1. What is an estimand?
-2. Why can within-subject designs suffer carryover?
-3. What is a manipulation check?
-4. When is a subjective measure necessary?
-5. What belongs in a preregistration?
+1. What is operationalization?
+2. When is a within-subject design advantageous?
+3. Why counterbalance blocks?
+4. What is a manipulation check?
+5. Why are repeated trials not independent participants?
+6. What makes a baseline mechanistically useful?
+7. What does preregistration distinguish?
+8. Name four haptics-specific confounds.
 
 ## Practical exercise
-Write a one-page preregistration for a study comparing three texture-rendering methods. Include hypotheses, primary outcome, design, sample size rationale, order control, exclusions, analysis, and open-science plan.
+Write a preregistration outline for comparing two mid-air contact renderers. Include primary claim, factors, baseline, calibration, auditory control, participant plan, exclusions, analysis, and safety.
+
+## Recommended reading
+- [R06] Psychophysics fundamentals.
+- [R07] Detection theory.
+- [R25] Human-centred design process.
 
 <!-- CHAPTER:18 -->
 # Haptic System Evaluation
-LEAD: Haptic evaluation should connect device physics, control performance, perceptual capability, usability, and task outcomes. No single metric adequately characterizes a haptic system.
+LEAD: Haptic evaluation should trace evidence from hardware output to perception, interaction, generalization, and risk. No single metric captures system quality.
 
 ## Learning objectives
-- Construct a layered evaluation plan.
-- Measure force, displacement, bandwidth, latency, accuracy, repeatability, and spatial resolution.
-- Select perceptual and task baselines.
-- Report operating conditions and uncertainty.
+- Build a multi-layer evaluation plan.
+- Characterize force, displacement, vibration, frequency response, latency, and repeatability.
+- Select psychophysical and task metrics.
+- Compare baselines and quantify uncertainty.
+- Evaluate comfort, accessibility, reliability, and deployment constraints.
+- Distinguish verification, validation, and generalization.
 
-## 1. Layered evaluation
-A useful framework contains four layers:
+## 1. Verification and validation
+**Verification:** did the system meet its engineering specification?
 
-1. **Component:** sensor and actuator characterization.
-2. **System:** closed-loop force, position, timing, workspace, and safety.
-3. **Perception:** detection, discrimination, quality, and comfort.
-4. **Task:** accuracy, time, learning, workload, and transfer.
+**Validation:** does it support the intended human use or scientific claim?
 
-Success at one layer does not guarantee success at the next. A device can have excellent bandwidth but poor mounting, or clear sensations that do not improve performance.
+A device can pass verification and fail validation, or vice versa if the specification was incomplete.
+
+FIGURE: assets/figures/17-research-validation-safety.svg | Evidence ladder from research question to deployment, alongside safety and ethics gates. | **Figure 18.1 — Evaluation builds evidence in layers.** Each stage has distinct measures, risks, and claims. Original course diagram; CC BY 4.0.
 
 ## 2. Physical characterization
-Measure the output relevant to the user:
+### Static output
+Force–displacement, pressure, maximum force, travel, hysteresis, creep.
 
-- static and dynamic force;
-- displacement or acceleration;
-- frequency response and bandwidth;
-- rise time and transient response;
-- noise and drift;
-- cross-talk;
-- spatial field or workspace;
-- thermal and acoustic output;
-- repeatability across sessions.
+### Dynamic output
+Frequency response, rise time, settling, impulse, bandwidth, phase, delay.
 
-State instrumentation, calibration, preload, geometry, filtering, and uncertainty.
+### Spatial output
+Workspace, focus size, contact area, localization field, cross-talk.
+
+### Repeatability
+Within trial, across trials, days, devices, users, temperature, and battery state.
+
+### Reliability
+Failure rate, drift, calibration retention, wear, and fault recovery.
 
 ## 3. Latency
-Latency can be decomposed into sensing, communication, computation, scheduling, driver, actuator, and mechanical response. Report median and distribution, not only one nominal value. Jitter can be perceptually and dynamically important.
+Measure end-to-end latency from user action or sensor event to physical output.
 
-Measure end-to-end delay with a shared physical reference when possible.
+Report distribution, not only mean. Jitter can be perceptually and dynamically important.
 
-## 4. Accuracy and repeatability
-Accuracy compares output with a target or reference. Repeatability measures consistency under the same conditions. Reproducibility concerns changes across operators, setups, devices, or laboratories.
+Separate:
 
-Spatial accuracy should be mapped across the workspace rather than reported from a central point alone.
+- sensing;
+- communication;
+- computation;
+- actuation;
+- mechanical response;
+- display synchronization.
 
-## 5. Perceptual evaluation
-Select methods from the perceptual claim. Detection thresholds support minimum-output claims. JNDs support resolution claims. Identification supports information capacity. Ratings support comfort or realism. Preference alone does not establish accuracy.
+## 4. Accuracy and resolution
+Accuracy should be referenced to a calibrated standard. Resolution should reflect noise and repeatability, not only command increments.
 
-Include a baseline such as visual-only, audio-only, conventional device, sham stimulation, or physical reference.
+Spatial resolution of a haptic display is perceptual unless specifically labelled as actuator spacing or physical field width.
 
-## 6. Task performance
-Task measures should represent the intended application. Examples include boundary localization, path tracking, stiffness discrimination, object recognition, grasp stability, error rate, skill transfer, and rehabilitation adherence.
+## 5. Psychophysical evaluation
+Possible questions:
 
-A statistically significant laboratory benefit may be too small or slow for practical use. Report effect size, uncertainty, failure cases, and user variability.
+- detection threshold;
+- discrimination or JND;
+- localization;
+- identification;
+- intensity matching;
+- similarity to a reference;
+- perceptual attribute scaling.
 
-## 7. Comfort and acceptance
-Measure pressure, heat, fatigue, pain, restriction, donning time, and willingness to reuse. For wearables, include realistic duration and movement. For contactless systems, include exposure, sound, and environmental constraints.
+Use methods described in Chapter 3 and preserve participant-level uncertainty.
 
-## Worked example: evaluating a mid-air texture system
-Component tests measure acoustic output and modulation. System tests map focal position and latency. Perceptual tests estimate detection and texture discrimination. Task tests compare material identification against visual-only and vibration baselines. Safety reporting includes exposure, duty cycle, and session duration.
+## 6. Task evaluation
+Task outcomes include:
+
+- error and success;
+- completion time;
+- force regulation;
+- trajectory quality;
+- information transfer;
+- learning rate;
+- retention and transfer;
+- visual attention;
+- workload.
+
+Choose tasks that represent intended use without confounding the mechanism.
+
+## 7. Experience and usability
+Measure comfort, fatigue, realism, preference, trust, agency, presence, and acceptability when relevant.
+
+Use qualitative interviews to identify failure modes that fixed ratings miss.
+
+## 8. Benchmarking
+A useful benchmark defines:
+
+- standardized task;
+- hardware configuration;
+- calibration;
+- data format;
+- reference conditions;
+- analysis metrics;
+- acceptable variation.
+
+Benchmarks improve comparison but can encourage optimization to narrow tasks. Include ecological evaluation.
+
+## 9. Baseline design
+Compare against the strongest relevant alternatives, not only no feedback.
+
+For a new texture renderer, compare against:
+
+- no texture;
+- simple playback;
+- physical reference;
+- another conditioned method;
+- matched-amplitude control.
+
+## 10. Statistical and practical significance
+Report effect size and uncertainty. Ask whether the change is meaningful relative to task demands, perceptual thresholds, cost, and risk.
+
+A statistically detectable 2 ms improvement may be irrelevant; a small force reduction may be clinically important.
+
+## 11. Generalization
+Test dimensions that matter:
+
+- new participants;
+- body sizes and skin conditions;
+- new objects or materials;
+- new tasks;
+- new devices;
+- longer duration;
+- different environments;
+- expert and novice users.
+
+## 12. Accessibility and inclusion
+Evaluate whether feedback is usable across sensory, motor, cognitive, and anatomical diversity.
+
+Do not assume haptics is inherently accessible. Strong vibration can be uncomfortable or undetectable for some users; wearable fit can exclude bodies; force feedback can demand motor ability.
+
+## 13. Failure analysis
+Record and report:
+
+- unstable contact;
+- missed cues;
+- false contacts;
+- calibration loss;
+- discomfort;
+- device breakage;
+- participant misunderstanding;
+- out-of-distribution model failure.
+
+Failure cases define system boundaries.
+
+## 14. Worked example: evaluating a wearable brake
+### Verification
+- torque–current or braking command curve;
+- response time;
+- maximum temperature;
+- fail-safe release;
+- repeatability.
+
+### Perceptual validation
+- resistance detection;
+- discrimination among levels;
+- direction and timing judgment.
+
+### Task validation
+- braking at target locations;
+- error, time, and applied force;
+- comparison with active motor feedback.
+
+### Wearability
+- mass, pressure, comfort, range of motion, long-duration use.
+
+### Generalization
+- different limb sizes, speeds, tasks, and sessions.
+
+## 15. Evaluation matrix
+| Claim | Minimum evidence |
+|---|---|
+| Accurate force | Calibrated force measurement and uncertainty |
+| Stable contact | Dynamic tests across user impedances and conditions |
+| Detectable cue | Psychophysical detection experiment |
+| More realistic | Defined reference and perceptual comparison |
+| Improves task | Controlled baseline and task outcome |
+| Generalizable | Held-out users, objects, devices, or contexts |
+| Safe | Risk analysis, limits, monitoring, and fault tests |
 
 ## Common misconceptions
-- Peak actuator output is not a complete system specification.
-- User preference does not establish rendering fidelity.
-- One body site or participant group does not establish generality.
-- Average latency can hide damaging jitter.
+- One user study validates the entire system.
+- Actuator spacing is perceptual resolution.
+- Mean latency is sufficient.
+- Preference proves performance benefit.
+- A statistically significant result is automatically useful.
+- A short laboratory exposure proves long-term safety.
+- No reported failures means no failures occurred.
 
 ## Key takeaways
-- Evaluate from component physics through task outcome.
-- Match metrics to claims.
-- Use meaningful baselines and uncertainty.
-- Report operating conditions, limitations, and failure cases.
+- Evaluate hardware, perception, task, usability, generalization, and safety separately.
+- Verification and validation answer different questions.
+- Latency, repeatability, and uncertainty require distributions and conditions.
+- Strong baselines and failure reporting increase credibility.
+- Accessibility and long-term use are system properties.
 
 ## Self-test
-1. What are the four evaluation layers?
-2. Why map output across the workspace?
-3. What is the difference between repeatability and reproducibility?
-4. Which method supports a spatial-resolution claim?
-5. Why report latency distribution?
+1. What distinguishes verification from validation?
+2. Why report latency jitter?
+3. What is the difference between actuator spacing and spatial resolution?
+4. What makes a baseline strong?
+5. Why measure retention and transfer?
+6. What is practical significance?
+7. Name five generalization dimensions.
+8. Why are failure cases valuable?
 
 ## Practical exercise
-Create an evaluation matrix for a new wearable force-feedback device. Include component, system, perception, task, comfort, safety, baselines, and pass/fail criteria.
+Create an evaluation matrix for a six-channel tactile sleeve. Include physical, perceptual, task, ergonomic, accessibility, reliability, and safety measures with acceptance criteria.
+
+## Evidence and source notes
+Z-width work illustrates the need to evaluate dynamic range and stability rather than isolated force values. [R10] Haptic teleoperation reviews emphasize systematic validation from force sensing to user performance. [R42]
+
+## Recommended reading
+- [R10] Z-width evaluation.
+- [R12] Broad haptics review.
+- [R42] Haptics in teleoperated medical interventions.
