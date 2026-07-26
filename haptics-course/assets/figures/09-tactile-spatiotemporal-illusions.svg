@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Phantom location, apparent tactile motion, and sensory saltation</title>
+  <desc id="desc">Three panels distinguish simultaneous stimulation that produces an intermediate phantom location, sequential stimulation that produces apparent motion, and pulse trains at separated sites that are perceived as hopping across intermediate skin locations.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0l10 5-10 5z" fill="#215f5a"/></marker>
+    <style>
+      .bg{fill:#fffdf8}.panel{fill:#f5f2ea;stroke:#c9c7be;stroke-width:2}.skin{stroke:#d9a995;stroke-width:34;stroke-linecap:round}.actual{fill:#d95d45;stroke:#fffdf8;stroke-width:3}.perceived{fill:#215f5a;stroke:#fffdf8;stroke-width:3}.ghost{fill:#215f5a;opacity:.25}.arrow{stroke:#215f5a;stroke-width:5;fill:none;marker-end:url(#arrow)}.heading{font:700 25px Georgia,serif;fill:#152421}.body{font:16px system-ui,sans-serif;fill:#5d6864}.small{font:700 14px system-ui,sans-serif;fill:#152421}.eyebrow{font:800 16px system-ui,sans-serif;letter-spacing:2px;fill:#a73d2c}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="720" rx="28"/>
+  <text x="55" y="58" class="eyebrow">SPARSE HARDWARE CAN PRODUCE PERCEPTS BETWEEN ACTUATORS</text>
+  <g transform="translate(45 100)">
+    <rect class="panel" width="350" height="550" rx="26"/>
+    <text x="28" y="52" class="heading">Phantom location</text>
+    <text x="28" y="84" class="body">Two sites stimulated together</text>
+    <line class="skin" x1="55" y1="230" x2="295" y2="230"/>
+    <circle class="actual" cx="95" cy="230" r="18"/><circle class="actual" cx="255" cy="230" r="18"/>
+    <circle class="ghost" cx="175" cy="230" r="31"/><circle class="perceived" cx="175" cy="230" r="14"/>
+    <text x="68" y="195" class="small">actual</text><text x="228" y="195" class="small">actual</text>
+    <text x="137" y="290" class="small">perceived between</text>
+    <text x="28" y="365" class="body">Relative intensity can shift the</text><text x="28" y="389" class="body">experienced location along the skin.</text>
+    <text x="28" y="445" class="small">KEY DISTINCTION</text>
+    <text x="28" y="472" class="body">A location illusion, not necessarily</text><text x="28" y="496" class="body">a continuous motion percept.</text>
+  </g>
+
+  <g transform="translate(425 100)">
+    <rect class="panel" width="350" height="550" rx="26"/>
+    <text x="28" y="52" class="heading">Apparent motion</text>
+    <text x="28" y="84" class="body">Separated sites stimulated in sequence</text>
+    <line class="skin" x1="55" y1="230" x2="295" y2="230"/>
+    <circle class="actual" cx="95" cy="230" r="18"/><circle class="actual" cx="255" cy="230" r="18"/>
+    <path class="arrow" d="M122 230h104"/>
+    <circle class="ghost" cx="145" cy="230" r="11"/><circle class="ghost" cx="175" cy="230" r="11"/><circle class="ghost" cx="205" cy="230" r="11"/>
+    <text x="62" y="195" class="small">first</text><text x="226" y="195" class="small">second</text>
+    <text x="111" y="290" class="small">perceived travel</text>
+    <text x="28" y="365" class="body">Timing, spacing, duration, body site,</text><text x="28" y="389" class="body">and intensity determine continuity.</text>
+    <text x="28" y="445" class="small">KEY DISTINCTION</text>
+    <text x="28" y="472" class="body">A direction and motion illusion produced</text><text x="28" y="496" class="body">by sequential events.</text>
+  </g>
+
+  <g transform="translate(805 100)">
+    <rect class="panel" width="350" height="550" rx="26"/>
+    <text x="28" y="52" class="heading">Sensory saltation</text>
+    <text x="28" y="84" class="body">Pulse trains delivered at distant sites</text>
+    <line class="skin" x1="55" y1="230" x2="295" y2="230"/>
+    <circle class="actual" cx="80" cy="230" r="18"/><circle class="actual" cx="270" cy="230" r="18"/>
+    <circle class="perceived" cx="118" cy="230" r="10"/><circle class="perceived" cx="156" cy="230" r="10"/><circle class="perceived" cx="194" cy="230" r="10"/><circle class="perceived" cx="232" cy="230" r="10"/>
+    <path class="arrow" d="M100 185h150"/>
+    <text x="90" y="290" class="small">felt as discrete hops</text>
+    <text x="28" y="365" class="body">Some taps are mislocalized toward</text><text x="28" y="389" class="body">intermediate positions.</text>
+    <text x="28" y="445" class="small">KEY DISTINCTION</text>
+    <text x="28" y="472" class="body">A sequence of displaced discrete events,</text><text x="28" y="496" class="body">classically called the cutaneous rabbit.</text>
+  </g>
+  <text x="600" y="690" text-anchor="middle" class="body">Conceptual comparison only. Exact percepts depend on stimulus timing, spacing, waveform, body site, and task.</text>
+</svg>
