@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Reliability-weighted visual and haptic cue integration</title>
+  <desc id="desc">Two broad probability distributions represent uncertain visual and haptic estimates of an object's size. Their combined estimate is narrower and lies closer to the more reliable cue. A lower panel shows that spatial or temporal conflict can instead lead to cue separation or loss of realism.</desc>
+  <defs>
+    <style>
+      .bg{fill:#fffdf8}.axis{stroke:#152421;stroke-width:3}.visual{stroke:#40677a;stroke-width:6;fill:none}.haptic{stroke:#a73d2c;stroke-width:6;fill:none}.combined{stroke:#215f5a;stroke-width:8;fill:none}.dash{stroke:#c9c7be;stroke-width:2;stroke-dasharray:7 7}.panel{fill:#f5f2ea;stroke:#c9c7be;stroke-width:2}.conflict{fill:#f3d8cf;stroke:#a73d2c;stroke-width:2}.aligned{fill:#dce7df;stroke:#215f5a;stroke-width:2}.label{font:17px system-ui,sans-serif;fill:#5d6864}.title{font:700 21px system-ui,sans-serif;fill:#152421}.eyebrow{font:800 16px system-ui,sans-serif;letter-spacing:2px;fill:#a73d2c}.big{font:700 28px Georgia,serif;fill:#152421}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="720" rx="28"/>
+  <text x="55" y="58" class="eyebrow">MULTISENSORY INTEGRATION DEPENDS ON RELIABILITY AND CONGRUENCE</text>
+  <g transform="translate(95 105)">
+    <text x="0" y="0" class="big">When cues are compatible</text>
+    <line class="axis" x1="0" y1="330" x2="1010" y2="330"/>
+    <path class="visual" d="M80 330C190 327 270 304 355 225C430 156 490 150 555 222C625 299 694 326 790 330"/>
+    <path class="haptic" d="M230 330C330 329 405 307 478 237C537 180 588 174 640 236C704 311 774 328 890 330"/>
+    <path class="combined" d="M350 330C450 329 515 306 566 208C603 136 641 133 678 207C729 308 790 329 880 330"/>
+    <line class="dash" x1="565" y1="110" x2="565" y2="330"/>
+    <line class="dash" x1="635" y1="110" x2="635" y2="330"/>
+    <line class="dash" x1="615" y1="80" x2="615" y2="330"/>
+    <text x="330" y="195" class="title" fill="#40677a">visual estimate</text>
+    <text x="705" y="215" class="title" fill="#a73d2c">haptic estimate</text>
+    <text x="655" y="112" class="title" fill="#215f5a">combined estimate</text>
+    <text x="500" y="365" class="label">estimated object property, such as size or height</text>
+    <text x="0" y="405" class="label">The combined estimate is typically more precise and lies nearer the cue with lower uncertainty.</text>
+  </g>
+
+  <g transform="translate(95 545)">
+    <rect class="aligned" x="0" y="0" width="475" height="120" rx="22"/>
+    <text x="25" y="38" class="title">Aligned in space and time</text>
+    <text x="25" y="70" class="label">Visual contact, impact sound, and haptic onset</text>
+    <text x="25" y="94" class="label">support one coherent event interpretation.</text>
+    <rect class="conflict" x="535" y="0" width="475" height="120" rx="22"/>
+    <text x="560" y="38" class="title">Conflicting or unreliable</text>
+    <text x="560" y="70" class="label">Large offsets or delays can reduce integration, expose</text>
+    <text x="560" y="94" class="label">the device, or cause one cue to dominate.</text>
+  </g>
+</svg>
