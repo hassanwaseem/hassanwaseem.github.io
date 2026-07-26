@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">A map of haptic information</title>
+  <desc id="desc">A central node labeled haptic perception connects to cutaneous, kinesthetic, proprioceptive, thermal, and contextual information. Each branch lists representative physical variables and perceptions.</desc>
+  <defs>
+    <style>
+      .bg{fill:#fffdf8}.line{stroke:#215f5a;stroke-width:4;fill:none}.node{fill:#f5f2ea;stroke:#c9c7be;stroke-width:2}.central{fill:#152421}.cutaneous{fill:#f3d8cf;stroke:#a73d2c;stroke-width:2}.kin{fill:#dce7df;stroke:#215f5a;stroke-width:2}.thermal{fill:#f1e0b8;stroke:#9d752f;stroke-width:2}.context{fill:#dbe6ee;stroke:#40677a;stroke-width:2}.title{font:700 23px system-ui,sans-serif;fill:#152421}.centraltext{font:700 30px Georgia,serif;fill:#fffdf8}.body{font:16px system-ui,sans-serif;fill:#5d6864}.small{font:700 14px system-ui,sans-serif;fill:#152421;letter-spacing:.5px}.eyebrow{font:800 16px system-ui,sans-serif;letter-spacing:2px;fill:#a73d2c}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760" rx="28"/>
+  <text x="55" y="58" class="eyebrow">HAPTICS IS NOT A SINGLE SIGNAL OR A SINGLE RECEPTOR</text>
+  <path class="line" d="M600 380L335 190M600 380L865 190M600 380L270 560M600 380L930 560M600 380L600 650" opacity=".65"/>
+  <circle class="central" cx="600" cy="380" r="132"/>
+  <text x="600" y="368" text-anchor="middle" class="centraltext">Haptic</text>
+  <text x="600" y="407" text-anchor="middle" class="centraltext">perception</text>
+  <text x="600" y="445" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" fill="#dce7df">an interaction-level percept</text>
+
+  <g transform="translate(95 92)">
+    <rect class="cutaneous" width="410" height="185" rx="24"/>
+    <text x="25" y="42" class="title">Cutaneous information</text>
+    <text x="25" y="76" class="small">PHYSICAL VARIABLES</text>
+    <text x="25" y="101" class="body">Indentation · vibration · skin stretch · friction</text>
+    <text x="25" y="134" class="small">COMMON PERCEPTS</text>
+    <text x="25" y="159" class="body">Contact · edge · texture · slip · local motion</text>
+  </g>
+
+  <g transform="translate(695 92)">
+    <rect class="kin" width="410" height="185" rx="24"/>
+    <text x="25" y="42" class="title">Kinesthetic information</text>
+    <text x="25" y="76" class="small">PHYSICAL VARIABLES</text>
+    <text x="25" y="101" class="body">Force · torque · joint motion · resistance</text>
+    <text x="25" y="134" class="small">COMMON PERCEPTS</text>
+    <text x="25" y="159" class="body">Weight · stiffness · constraint · effort</text>
+  </g>
+
+  <g transform="translate(55 493)">
+    <rect class="node" width="390" height="185" rx="24"/>
+    <text x="25" y="42" class="title">Proprioceptive information</text>
+    <text x="25" y="76" class="small">BODY-STATE SIGNALS</text>
+    <text x="25" y="101" class="body">Muscle length · tendon tension · joint state</text>
+    <text x="25" y="134" class="small">COMMON PERCEPTS</text>
+    <text x="25" y="159" class="body">Position · movement · effort · limb configuration</text>
+  </g>
+
+  <g transform="translate(755 493)">
+    <rect class="thermal" width="390" height="185" rx="24"/>
+    <text x="25" y="42" class="title">Thermal information</text>
+    <text x="25" y="76" class="small">PHYSICAL VARIABLES</text>
+    <text x="25" y="101" class="body">Heat flux · temperature change · contact duration</text>
+    <text x="25" y="134" class="small">COMMON PERCEPTS</text>
+    <text x="25" y="159" class="body">Warmth · coolness · material impression</text>
+  </g>
+
+  <g transform="translate(472 624)">
+    <rect class="context" width="256" height="94" rx="24"/>
+    <text x="128" y="35" text-anchor="middle" class="title">Context</text>
+    <text x="128" y="63" text-anchor="middle" class="body">Vision · sound · expectation</text>
+    <text x="128" y="84" text-anchor="middle" class="body">task · prior experience</text>
+  </g>
+</svg>
