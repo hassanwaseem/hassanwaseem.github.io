@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Mechanoreceptive afferent classes as an engineering design matrix</title>
+  <desc id="desc">A two by two matrix places type I small-field and type II large-field afferents horizontally, and slowly adapting and fast adapting afferents vertically. Cells summarize SA1, SA2, FA1, and FA2 response tendencies with a warning that natural touch activates overlapping populations.</desc>
+  <defs>
+    <style>
+      .bg{fill:#fffdf8}.cell{fill:#f5f2ea;stroke:#c9c7be;stroke-width:2}.sa1{fill:#f3d8cf;stroke:#a73d2c;stroke-width:2}.fa1{fill:#dce7df;stroke:#215f5a;stroke-width:2}.sa2{fill:#f1e0b8;stroke:#9d752f;stroke-width:2}.fa2{fill:#dbe6ee;stroke:#40677a;stroke-width:2}.heading{font:700 27px Georgia,serif;fill:#152421}.title{font:700 22px system-ui,sans-serif;fill:#152421}.body{font:16px system-ui,sans-serif;fill:#5d6864}.axis{font:800 15px system-ui,sans-serif;letter-spacing:1.5px;fill:#a73d2c}.warning{font:16px system-ui,sans-serif;fill:#152421}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760" rx="28"/>
+  <text x="60" y="58" class="axis">A FUNCTIONAL SUMMARY FOR GLABROUS SKIN</text>
+  <text x="600" y="110" text-anchor="middle" class="heading">Receptive-field structure</text>
+  <text x="385" y="145" text-anchor="middle" class="title">Type I: smaller, more sharply bounded fields</text>
+  <text x="855" y="145" text-anchor="middle" class="title">Type II: larger, more diffuse fields</text>
+  <text x="58" y="325" transform="rotate(-90 58 325)" text-anchor="middle" class="heading">Adaptation to sustained indentation</text>
+
+  <text x="155" y="260" text-anchor="middle" class="title">Slowly adapting</text>
+  <text x="155" y="530" text-anchor="middle" class="title">Fast adapting</text>
+
+  <g transform="translate(235 180)">
+    <rect class="sa1" width="350" height="225" rx="24"/>
+    <text x="28" y="48" class="title">SA1 / Merkel-associated</text>
+    <text x="28" y="82" class="body">Sustained response to indentation</text>
+    <text x="28" y="111" class="body">Fine spatial structure, edges, points, pressure</text>
+    <text x="28" y="149" class="axis">DESIGN RELEVANCE</text>
+    <text x="28" y="177" class="body">Static shape and local contact cues require</text>
+    <text x="28" y="201" class="body">controlled indentation and spatial calibration.</text>
+  </g>
+  <g transform="translate(645 180)">
+    <rect class="sa2" width="350" height="225" rx="24"/>
+    <text x="28" y="48" class="title">SA2 / Ruffini-associated</text>
+    <text x="28" y="82" class="body">Sustained response; sensitivity to skin stretch</text>
+    <text x="28" y="111" class="body">Hand configuration and distributed deformation</text>
+    <text x="28" y="149" class="axis">DESIGN RELEVANCE</text>
+    <text x="28" y="177" class="body">Tangential deformation can signal direction,</text>
+    <text x="28" y="201" class="body">friction, slip, or limb configuration.</text>
+  </g>
+  <g transform="translate(235 450)">
+    <rect class="fa1" width="350" height="225" rx="24"/>
+    <text x="28" y="48" class="title">FA1 / Meissner-associated</text>
+    <text x="28" y="82" class="body">Strong response to changes and local skin motion</text>
+    <text x="28" y="111" class="body">Flutter, low-frequency events, incipient slip</text>
+    <text x="28" y="149" class="axis">DESIGN RELEVANCE</text>
+    <text x="28" y="177" class="body">Useful for event timing and dynamic contact,</text>
+    <text x="28" y="201" class="body">but not a substitute for sustained force.</text>
+  </g>
+  <g transform="translate(645 450)">
+    <rect class="fa2" width="350" height="225" rx="24"/>
+    <text x="28" y="48" class="title">FA2 / Pacinian-associated</text>
+    <text x="28" y="82" class="body">High sensitivity to rapid vibration and transients</text>
+    <text x="28" y="111" class="body">Large fields and mechanically transmitted events</text>
+    <text x="28" y="149" class="axis">DESIGN RELEVANCE</text>
+    <text x="28" y="177" class="body">Small mechanical vibrations can spread widely;</text>
+    <text x="28" y="201" class="body">localization and intensity must be measured.</text>
+  </g>
+
+  <rect x="235" y="700" width="760" height="42" rx="15" fill="#152421"/>
+  <text x="615" y="727" text-anchor="middle" fill="#fffdf8" class="warning">These are response tendencies, not four isolated perceptual “wires.” Natural stimuli recruit overlapping afferent populations.</text>
+</svg>
