@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+  <title id="title">From a mechanical button press to the haptic interaction loop</title>
+  <desc id="desc">The top row shows finger contact, skin deformation, mechanical resistance, a snap-through transient, and multisensory perception. The lower row shows the closed-loop stages user action, sensing, computation, actuation, physical stimulus, perception, and changed action.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0l10 5-10 5z" fill="#215f5a"/></marker>
+    <style>
+      .bg{fill:#fffdf8}.panel{fill:#f5f2ea;stroke:#c9c7be;stroke-width:2}.accent{fill:#dce7df;stroke:#215f5a;stroke-width:2}.event{fill:#f3d8cf;stroke:#a73d2c;stroke-width:2}.label{font:700 21px system-ui,sans-serif;fill:#152421}.small{font:16px system-ui,sans-serif;fill:#5d6864}.eyebrow{font:800 16px system-ui,sans-serif;letter-spacing:2px;fill:#a73d2c}.arrow{stroke:#215f5a;stroke-width:3;fill:none;marker-end:url(#arrow)}.number{font:700 16px system-ui,sans-serif;fill:white}.circle{fill:#215f5a}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="690" rx="28"/>
+  <text x="55" y="55" class="eyebrow">A REAL BUTTON IS A MULTI-STAGE PHYSICAL EVENT</text>
+  <g transform="translate(55 85)">
+    <rect class="panel" x="0" y="0" width="190" height="150" rx="20"/>
+    <circle cx="48" cy="56" r="27" fill="#d95d45" opacity=".8"/>
+    <rect x="78" y="82" width="82" height="18" rx="8" fill="#215f5a"/>
+    <text x="24" y="125" class="label">Contact</text><text x="24" y="146" class="small">Finger meets surface</text>
+    <path class="arrow" d="M202 75h50"/>
+    <rect class="panel" x="265" y="0" width="190" height="150" rx="20"/>
+    <path d="M305 45q55 34 110 0" fill="none" stroke="#d95d45" stroke-width="9" stroke-linecap="round"/>
+    <text x="289" y="125" class="label">Deformation</text><text x="289" y="146" class="small">Skin and mechanism</text>
+    <path class="arrow" d="M467 75h50"/>
+    <rect class="accent" x="530" y="0" width="190" height="150" rx="20"/>
+    <path d="M575 42v57m100-57v57M575 70h100" stroke="#215f5a" stroke-width="7" stroke-linecap="round"/>
+    <text x="554" y="125" class="label">Resistance</text><text x="554" y="146" class="small">Force rises with motion</text>
+    <path class="arrow" d="M732 75h50"/>
+    <rect class="event" x="795" y="0" width="190" height="150" rx="20"/>
+    <path d="M835 80l25-28 25 43 25-62 28 58" fill="none" stroke="#a73d2c" stroke-width="7" stroke-linejoin="round"/>
+    <text x="819" y="125" class="label">Transient</text><text x="819" y="146" class="small">Snap, vibration, sound</text>
+    <path class="arrow" d="M997 75h50"/>
+    <rect class="panel" x="1060" y="0" width="85" height="150" rx="20"/>
+    <circle cx="1102" cy="59" r="24" fill="#d2a75f"/>
+    <text x="1076" y="125" class="label" font-size="18">Percept</text>
+  </g>
+  <text x="55" y="320" class="eyebrow">AN ENGINEERED HAPTIC SYSTEM CLOSES THE LOOP</text>
+  <g transform="translate(55 350)">
+    <g transform="translate(0 0)"><circle class="circle" cx="34" cy="34" r="28"/><text x="29" y="40" class="number">1</text><rect class="panel" x="0" y="72" width="135" height="116" rx="18"/><text x="18" y="110" class="label">User</text><text x="18" y="137" class="label">action</text><text x="18" y="166" class="small">Move or press</text></g>
+    <path class="arrow" d="M145 130h35"/>
+    <g transform="translate(190 0)"><circle class="circle" cx="34" cy="34" r="28"/><text x="29" y="40" class="number">2</text><rect class="panel" x="0" y="72" width="135" height="116" rx="18"/><text x="18" y="123" class="label">Sensing</text><text x="18" y="154" class="small">State estimate</text></g>
+    <path class="arrow" d="M335 130h35"/>
+    <g transform="translate(380 0)"><circle class="circle" cx="34" cy="34" r="28"/><text x="29" y="40" class="number">3</text><rect class="accent" x="0" y="72" width="135" height="116" rx="18"/><text x="18" y="123" class="label">Model</text><text x="18" y="154" class="small">Compute response</text></g>
+    <path class="arrow" d="M525 130h35"/>
+    <g transform="translate(570 0)"><circle class="circle" cx="34" cy="34" r="28"/><text x="29" y="40" class="number">4</text><rect class="panel" x="0" y="72" width="135" height="116" rx="18"/><text x="18" y="123" class="label">Actuation</text><text x="18" y="154" class="small">Drive hardware</text></g>
+    <path class="arrow" d="M715 130h35"/>
+    <g transform="translate(760 0)"><circle class="circle" cx="34" cy="34" r="28"/><text x="29" y="40" class="number">5</text><rect class="event" x="0" y="72" width="135" height="116" rx="18"/><text x="18" y="116" class="label">Physical</text><text x="18" y="143" class="label">stimulus</text><text x="18" y="171" class="small">Force, motion, heat</text></g>
+    <path class="arrow" d="M905 130h35"/>
+    <g transform="translate(950 0)"><circle class="circle" cx="34" cy="34" r="28"/><text x="29" y="40" class="number">6</text><rect class="panel" x="0" y="72" width="135" height="116" rx="18"/><text x="18" y="123" class="label">Perception</text><text x="18" y="154" class="small">Interpret event</text></g>
+    <path d="M1088 180c45 70-20 120-486 120S75 270 75 206" class="arrow"/>
+    <text x="440" y="292" class="small">Perception changes the next movement, so the loop repeats.</text>
+  </g>
+</svg>
