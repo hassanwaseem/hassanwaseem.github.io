@@ -1,0 +1,8 @@
+name,audience,description,chapter_ids,status,notes
+Haptic device designer,Engineers and prototypers,"A hardware-first route through mechanics, sensors, actuators, control, rendering, wearability, safety, and validation.",01|02|05|06|07|08|09|10|11|13|18|23|24,draft,
+Perception and psychophysics researcher,Perception researchers,"A route focused on somatosensation, thresholds, multisensory effects, experimental design, and perceptual evaluation.",01|02|03|04|09|12|14|17|18|23|24,draft,
+Computational haptics researcher,ML and modelling researchers,"A route from haptic signals and rendering to texture models, object-state representations, machine learning, and reproducible evaluation.",01|03|05|06|11|12|15|16|17|18|24,draft,
+Mid-air haptics researcher,Contactless-haptics researchers,"A route through perception, acoustics and signals, actuation, vibrotactile rendering, contactless systems, XR, volumetric haptics, and safety.",01|02|03|04|06|08|09|14|17|18|19|22|23|24,draft,
+Wearable haptics researcher,Wearable-interface researchers,"A route covering body perception, actuator selection, vibration, force feedback, soft and wearable design, XR, medicine, and safety.",01|02|03|05|06|08|09|10|13|17|18|19|21|23|24,draft,
+VR and AR haptics researcher,XR researchers,"A route through multisensory perception, force and tactile rendering, system integration, co-registration, evaluation, and spatial interaction.",01|03|04|09|10|11|12|13|14|17|18|19|22|23|24,draft,
+Medical and rehabilitation haptics researcher,Clinical and health-technology researchers,"A route emphasizing perception, safe interfaces, experiment design, system validation, simulation, rehabilitation, ethics, and translation.",01|02|03|05|07|08|10|13|17|18|19|21|23|24,draft,
