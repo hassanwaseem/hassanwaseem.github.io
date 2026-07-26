@@ -1,0 +1,16 @@
+.chapter-figure{margin:42px 0 48px;padding:16px;background:#fffdf8;border:1px solid rgba(21,36,33,.16);border-radius:22px;box-shadow:0 18px 46px rgba(21,36,33,.07)}
+.figure-image-link{display:block;border-radius:14px;overflow:hidden;background:#fffdf8}
+.chapter-figure img{display:block;width:100%;height:auto}
+.chapter-figure figcaption{padding:16px 10px 4px;color:#5d6864;font-size:.88rem;line-height:1.55}
+.chapter-figure figcaption strong{color:#152421}
+.chapter-callout{margin:30px 0;padding:22px 24px;background:#fffdf8;border:1px solid rgba(21,36,33,.2);border-left:6px solid #d95d45;border-radius:0 16px 16px 0}
+.chapter-callout>strong{display:block;margin-bottom:7px;color:#a73d2c;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+.chapter-callout p{margin:0;color:#46534f}
+.citation{white-space:nowrap;color:#a73d2c;font-size:.82em;font-weight:750}
+.chapter-article h4{margin:28px 0 10px;color:#215f5a;font-size:1rem;letter-spacing:.02em;text-transform:uppercase}
+.chapter-article>div>p{max-width:76ch}
+.chapter-article .chapter-table-wrap{max-width:100%}
+.chapter-article table caption{padding:0 0 10px;text-align:left;font-weight:750}
+.chapter-article .lead{max-width:68ch}
+@media(max-width:720px){.chapter-figure{margin:30px -8px 36px;padding:8px;border-radius:16px}.chapter-figure figcaption{padding:12px 8px 5px;font-size:.82rem}.chapter-callout{padding:18px 18px}.chapter-article>div>p{max-width:none}}
+@media print{.chapter-figure{break-inside:avoid;box-shadow:none}.chapter-callout{break-inside:avoid}.figure-image-link{pointer-events:none}}
