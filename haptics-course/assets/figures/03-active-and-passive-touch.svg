@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Passive touch and active touch compared</title>
+  <desc id="desc">The passive-touch panel shows a fixed hand receiving a controlled stimulus. The active-touch panel shows a hand moving across an object, with action changing the available sensory information in a closed loop.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0l10 5-10 5z" fill="#215f5a"/></marker>
+    <style>
+      .bg{fill:#fffdf8}.panel{fill:#f5f2ea;stroke:#c9c7be;stroke-width:2}.active{fill:#dce7df;stroke:#215f5a;stroke-width:2}.stim{fill:#d95d45}.skin{fill:#e8b8a8}.object{fill:#152421}.line{stroke:#215f5a;stroke-width:4;fill:none;marker-end:url(#arrow)}.dash{stroke:#a73d2c;stroke-width:4;stroke-dasharray:9 8;fill:none;marker-end:url(#arrow)}.heading{font:700 30px Georgia,serif;fill:#152421}.body{font:17px system-ui,sans-serif;fill:#5d6864}.label{font:700 18px system-ui,sans-serif;fill:#152421}.eyebrow{font:800 16px system-ui,sans-serif;letter-spacing:2px;fill:#a73d2c}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="650" rx="28"/>
+  <text x="55" y="58" class="eyebrow">THE MOVEMENT STRATEGY CAN BE PART OF THE SENSORY MEASUREMENT</text>
+  <g transform="translate(55 90)">
+    <rect class="panel" width="515" height="500" rx="28"/>
+    <text x="34" y="58" class="heading">Passive touch</text>
+    <text x="34" y="92" class="body">The investigator controls the stimulus while the</text>
+    <text x="34" y="117" class="body">body site remains comparatively still.</text>
+    <rect x="145" y="250" width="225" height="56" rx="27" class="skin"/>
+    <rect x="230" y="158" width="55" height="65" rx="12" class="stim"/>
+    <path class="dash" d="M258 223v26"/>
+    <path d="M238 187h40m-32-13h24" stroke="#fffdf8" stroke-width="5" stroke-linecap="round"/>
+    <text x="34" y="365" class="label">Advantages</text>
+    <text x="34" y="394" class="body">Precise timing · controlled location · repeatability</text>
+    <text x="34" y="438" class="label">Limitation</text>
+    <text x="34" y="467" class="body">May not represent natural exploratory interaction</text>
+  </g>
+  <g transform="translate(630 90)">
+    <rect class="active" width="515" height="500" rx="28"/>
+    <text x="34" y="58" class="heading">Active touch</text>
+    <text x="34" y="92" class="body">The user selects movement to reveal information.</text>
+    <text x="34" y="117" class="body">Action alters the signal arriving at the receptors.</text>
+    <path d="M120 270c40-80 86-94 138-48 27 24 65 22 95 7l48 83H127z" class="skin"/>
+    <rect x="92" y="318" width="335" height="44" rx="12" class="object"/>
+    <path class="line" d="M150 190c72-60 186-54 260 3"/>
+    <text x="136" y="172" class="label">chosen motion</text>
+    <path class="dash" d="M400 360c-32 62-107 83-160 50"/>
+    <text x="266" y="454" class="label">new sensory evidence</text>
+    <text x="34" y="405" class="label">Examples</text>
+    <text x="34" y="434" class="body">Rub for texture · press for compliance · lift for weight</text>
+    <text x="34" y="478" class="label">Research implication</text>
+    <text x="34" y="507" class="body">The task and allowed movement must be reported.</text>
+  </g>
+</svg>
