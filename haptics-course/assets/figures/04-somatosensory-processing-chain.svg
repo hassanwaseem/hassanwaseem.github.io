@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+  <title id="title">Somatosensory processing from contact to action</title>
+  <desc id="desc">A schematic chain connects a physical event at the body to tissue mechanics, peripheral afferents, spinal and brain pathways, multisensory interpretation, and motor action. A feedback arrow returns from action to the physical event.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0l10 5-10 5z" fill="#215f5a"/></marker>
+    <style>
+      .bg{fill:#fffdf8}.box{fill:#f5f2ea;stroke:#c9c7be;stroke-width:2}.green{fill:#dce7df;stroke:#215f5a;stroke-width:2}.red{fill:#f3d8cf;stroke:#a73d2c;stroke-width:2}.blue{fill:#dbe6ee;stroke:#40677a;stroke-width:2}.line{stroke:#215f5a;stroke-width:4;fill:none;marker-end:url(#arrow)}.feedback{stroke:#a73d2c;stroke-width:4;fill:none;stroke-dasharray:10 8;marker-end:url(#arrow)}.heading{font:700 21px system-ui,sans-serif;fill:#152421}.body{font:15px system-ui,sans-serif;fill:#5d6864}.eyebrow{font:800 16px system-ui,sans-serif;letter-spacing:2px;fill:#a73d2c}.caption{font:16px system-ui,sans-serif;fill:#5d6864}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="690" rx="28"/>
+  <text x="55" y="58" class="eyebrow">A DEVICE ACTS ON A DISTRIBUTED BIOLOGICAL SYSTEM</text>
+  <g transform="translate(45 120)">
+    <rect class="red" x="0" y="0" width="170" height="190" rx="22"/>
+    <circle cx="85" cy="62" r="31" fill="#d95d45" opacity=".85"/>
+    <path d="M37 105h96" stroke="#a73d2c" stroke-width="8" stroke-linecap="round"/>
+    <text x="22" y="145" class="heading">Physical event</text>
+    <text x="22" y="171" class="body">Force · vibration</text><text x="22" y="191" class="body">stretch · heat</text>
+    <path class="line" d="M180 95h38"/>
+
+    <rect class="box" x="230" y="0" width="170" height="190" rx="22"/>
+    <path d="M270 58q45 40 90 0M270 82q45 40 90 0M270 106q45 40 90 0" fill="none" stroke="#d95d45" stroke-width="6" stroke-linecap="round"/>
+    <text x="252" y="145" class="heading">Tissue mechanics</text>
+    <text x="252" y="171" class="body">Skin and deeper</text><text x="252" y="191" class="body">tissues filter energy</text>
+    <path class="line" d="M410 95h38"/>
+
+    <rect class="green" x="460" y="0" width="170" height="190" rx="22"/>
+    <path d="M495 96c25-48 43 47 70-4s39 42 54-18" fill="none" stroke="#215f5a" stroke-width="6"/>
+    <text x="482" y="145" class="heading">Afferent activity</text>
+    <text x="482" y="171" class="body">Population patterns</text><text x="482" y="191" class="body">across nerve fibres</text>
+    <path class="line" d="M640 95h38"/>
+
+    <rect class="blue" x="690" y="0" width="170" height="190" rx="22"/>
+    <path d="M735 42v80m40-80v80m40-80v80M724 65h102M724 95h102" stroke="#40677a" stroke-width="5" stroke-linecap="round"/>
+    <text x="712" y="145" class="heading">Neural pathways</text>
+    <text x="712" y="171" class="body">Spinal cord · brainstem</text><text x="712" y="191" class="body">thalamus · cortex</text>
+    <path class="line" d="M870 95h38"/>
+
+    <rect class="box" x="920" y="0" width="190" height="190" rx="22"/>
+    <circle cx="1015" cy="70" r="45" fill="#d2a75f" opacity=".8"/>
+    <path d="M987 70h56M1015 42v56" stroke="#fffdf8" stroke-width="5" stroke-linecap="round"/>
+    <text x="942" y="145" class="heading">Interpretation</text>
+    <text x="942" y="171" class="body">Touch + vision + action</text><text x="942" y="191" class="body">+ expectation + task</text>
+  </g>
+
+  <g transform="translate(235 400)">
+    <rect class="green" x="0" y="0" width="730" height="125" rx="24"/>
+    <text x="28" y="44" class="heading">Perception guides action</text>
+    <text x="28" y="75" class="caption">Grip force, exploratory movement, posture, and attention change what the body samples next.</text>
+    <text x="28" y="101" class="caption">For a haptic researcher, movement is therefore both an outcome and part of the measurement process.</text>
+  </g>
+  <path class="feedback" d="M965 462c150 0 160-280 94-280"/>
+  <path class="feedback" d="M235 462C70 462 55 302 110 302"/>
+  <text x="55" y="615" class="caption">Schematic only: this diagram summarizes functional stages and is not an anatomical wiring diagram.</text>
+</svg>
